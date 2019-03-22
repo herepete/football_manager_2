@@ -82,7 +82,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
         wildcard_ata=random.randint(70,90)
         won_game=game_logic(opp_skill_ata=wildcard_ata,defscore=defscore,atascore=atascore,opp_skill_def=wildcard_def)
         if won_game == 0:
-            print ("Unlucky try again next season...")
+            input ("Unlucky try again next season...")
             return (lose_in_wildcard_exp,playoffwins)
 
         else:
@@ -93,7 +93,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     divisional_ata=random.randint(75,95)
     won_game=game_logic(opp_skill_ata=divisional_ata,defscore=defscore,atascore=atascore,opp_skill_def=divisional_def)
     if won_game == 0:
-        print ("Unlucky try again next season...")
+        input ("Unlucky try again next season...")
         return (lose_in_wildcard_exp,playoffwins)
 
     else:
@@ -105,7 +105,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     conference_ata=random.randint(80,95)
     won_game=game_logic(opp_skill_ata=conference_ata,defscore=defscore,atascore=atascore,opp_skill_def=conference_def)
     if won_game == 0:
-        print ("Unlucky try again next season...")
+        input ("Unlucky try again next season...")
         return (lose_in_wildcard_exp,playoffwins)
     else:
         playoffwins+=1
@@ -116,11 +116,11 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     superbowl_ata=random.randint(85,100)
     won_game=game_logic(opp_skill_ata=superbowl_ata,defscore=defscore,atascore=atascore,opp_skill_def=superbowl_def)
     if won_game == 0:
-        print ("Unlucky try again next season...")
+        input ("Unlucky try again next season...")
         return (lose_in_superblowl,playoffwins)
     else:
         playoffwins+=1
-        print ("Woop Superbowl won...")
+        input ("Woop Superbowl won...")
         return (win_superbowl,playoffwins)
 
         

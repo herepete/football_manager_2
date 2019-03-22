@@ -335,14 +335,16 @@ def swap_players(squad,all_round_pn,report="y",):
 
 def outofcontract_players(squad):
 
-    print ("\nHere are the Out of contract players...(limited to 5 players displayed at the moment)\n")
+    print ("\nHere are the Out of contract players...(you can renew/release players after the draft,output limited to 10 players)\n")
     outofcontract=[]
     temp_squad=squad.copy()
     for index,i in enumerate(temp_squad):
         if (i[15]==0):
             outofcontract.append(i)
+    #220319
+    outofcontract.sort(key=lambda flawedcreatedraft: flawedcreatedraft[13], reverse=True)
 
-    func_other_format_input.printplayers(outofcontract,draft="n",outputlimit=5,justpostion="")
+    func_other_format_input.printplayers(outofcontract,draft="n",outputlimit=10,justpostion="")
 
 def money(squad):
 
@@ -496,6 +498,11 @@ def renewplayercontract(squad,developmentsquad):
         print ("Note if you release a single player you can replace them with someone from the Development squad if you release all the replacment will be an undrafted rookie")
         playertochange=(input("\nWhich numbered player do you want to renew/release {}? or press e to exit or r to release all ".format(numberofplayers)))
         if playertochange=="r":
+            playertochange2=(input("\nAre you really,really sure?(y) "))
+            if playertochange2 !="y":
+                print ("Confirmation not recevied, returning you to main menu")
+                break
+
             for i in numberofplayers:
                 try:
                     position_of_player=squad[i][0]
@@ -1683,6 +1690,7 @@ def draft_clearup (developmentsquad):
     #print (master_undrafted_rookies)
     #input("W2")
 
+
     return developmentsquad
         
     
@@ -2240,7 +2248,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         os.system('clear')
         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
         #print("Press enter to continue or m for menu,p see draft potential,v for value to team \n,f for flawed genius y View your squad, d see Full Draft , r Renew players contracts ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
-        print("Press: \nh Help menu\nd Scout Draft\nv View your Squad\nx First XI Team Report\nr Renew/release (out of contract players)\ne Enter draft(i.e Continue)\ns Sell a player\nm move up/down draft board ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
+        print("Press: \nh Help menu\nd Scout Draft\nv View your Squad\nx First XI Team Report\nr View (out of contract players)\ne Enter draft(i.e Continue)\ns Sell a player\nm move up/down draft board ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
 
 
         if draft_already_created==0:
@@ -2252,6 +2260,9 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         print ("You can deal with out of contract players either before or after the draft\n")
         players_to_sell=swap_players(squad=squad,all_round_pn=all_round_pn,report="y")
         outofcontract_players(squad)
+        #breakpoint()
+        #developmentsquad=draft_clearup (developmentsquad)
+        #breakpoint()
         money(squad)
         try:
             draftnumbers(thisyear_firstround,nextyear_firstround,thisyear_secondround,nextyear_secondround,thisyear_thirdround,nextyear_thirdround,first_round_pn, second_round_pn,third_round_pn,all_round_pn)
@@ -2275,7 +2286,9 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             os.system('clear')
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             squad=enter_draft(all_round_pn,squad,developmentsquad)
+            breakpoint()
             developmentsquad=draft_clearup (developmentsquad)
+            breakpoint()
             try:
                 squad,developmentsquad=sign_uncontractedplayers(squad,developmentsquad)
             except Exception as e:
@@ -2398,9 +2411,9 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             continue
 
         if userinput=="r":
-            os.system('clear')
-            func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
-            squad,developmentsquad=renewplayercontract(squad,developmentsquad)
+            #os.system('clear')
+            #func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
+            #squad,developmentsquad=renewplayercontract(squad,developmentsquad)
             input("Press a button to conitnue")
             continue
 
