@@ -2214,13 +2214,13 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
     if int(normal_season_wins) < 1:
         first_round_pn=1
     elif int(normal_season_wins) < 3:
-        first_round_pn=random.randint(1,3)
+        first_round_pn=random.randint(1,4)
     elif int(normal_season_wins) < 6:
-        first_round_pn=random.randint(4,5)
+        first_round_pn=random.randint(5,6)
+    elif int(normal_season_wins) < 7:
+        first_round_pn=random.randint(7,12)
     elif int(normal_season_wins) < 8:
-        first_round_pn=random.randint(6,8)
-    elif int(normal_season_wins) < 8:
-        first_round_pn=random.randint(6,8)
+        first_round_pn=random.randint(8,13)
     elif int(normal_season_wins) < 10:
         first_round_pn=random.randint(14,15)
     elif int(playoff_wins==1):
