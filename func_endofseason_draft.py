@@ -580,7 +580,7 @@ def renewplayercontract(squad,developmentsquad):
                         playertochange=int(playertochange)
                         squad,developmentsquad=switch_main_squad_and_dev_squad(squad=squad,devsquad=developmentsquad,playertoremove=playertochange)
                         defscore, atascore = func_other_teamreport.report(squad, formation, printoutput="n")
-                        input ("\n The chosen player has been released...")
+                        input ("\nThe chosen player has been released...")
                         break
             if playeroption =="c":
                    #renew contract
@@ -1152,7 +1152,7 @@ def draft_choice_logic(pick_num=3):
         best_gk=12
         best_def=24
         best_mid=36
-        best_ata=50
+        best_ata=60
         best_pot=100
         best_flawed=0 # needs some work to include
        # i.e 3rd round
@@ -2248,7 +2248,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         os.system('clear')
         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
         #print("Press enter to continue or m for menu,p see draft potential,v for value to team \n,f for flawed genius y View your squad, d see Full Draft , r Renew players contracts ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
-        print("Press: \nh Help menu\nd Scout Draft\nv View your Squad\nx First XI Team Report\nr View (out of contract players)\ne Enter draft(i.e Continue)\ns Sell a player\nm move up/down draft board ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
+        print("Press: \nh Help menu\nd Scout Draft\nv View your Squad\nx First XI Team Report\nr Change (out of contract players)\ne Enter draft(i.e Continue)\ns Sell a player\nm move up/down draft board ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
 
 
         if draft_already_created==0:
@@ -2286,9 +2286,9 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             os.system('clear')
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             squad=enter_draft(all_round_pn,squad,developmentsquad)
-            breakpoint()
+            #breakpoint()
             developmentsquad=draft_clearup (developmentsquad)
-            breakpoint()
+            #breakpoint()
             try:
                 squad,developmentsquad=sign_uncontractedplayers(squad,developmentsquad)
             except Exception as e:
@@ -2411,9 +2411,9 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             continue
 
         if userinput=="r":
-            #os.system('clear')
-            #func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
-            #squad,developmentsquad=renewplayercontract(squad,developmentsquad)
+            os.system('clear')
+            func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
+            squad,developmentsquad=renewplayercontract(squad,developmentsquad)
             input("Press a button to conitnue")
             continue
 
@@ -2437,15 +2437,23 @@ if __name__=="__main__":
 
     squad= [['Gk', 'Leon', 'Thomon', 27, 54, 1, 1, 8, 14, 13, 19, 9, 5, 61, 62, 1, 3, ''], ['Gk', 'Milan', 'Gill', 29, 69, 8, 10, 18, 7, 11, 15, 16, 6, 77, 60, 1, 6, ''], ['Gk', 'Phil', 'French', 22, 66, 1, 1, 5, 6, 13, 18, 19, 4, 67, 52, 1, 4, ''], ['Def', 'Davit', 'Newbury', 27, 3, 51, 29, 14, 9, 8, 15, 6, 5, 59, 50, 1, 2, ''], ['Def', 'Brogan', 'Whitehouse', 30, 2, 59, 26, 6, 16, 9, 8, 20, 7, 62, 58, 1, 3, ''], ['Def', 'Louis', 'Stewart', 26, 8, 70, 14, 7, 6, 8, 10, 9, 5, 62, 38, 3, 3, ''], ['Def', 'Mychal', 'Scott', 35, 6, 54, 26, 5, 17, 15, 20, 6, 8, 60, 66, 1, 3, ''], ['Def', 'Ada', 'Green ', 27, 3, 60, 32, 6, 17, 18, 14, 11, 7, 64, 71, 2, 3, ''], ['Def', 'Ace', 'Njoku', 18, 2, 63, 23, 16, 5, 11, 6, 6, 1, 62, 46, 2, 3, ''], ['Def', 'Luke ', 'Edge', 27, 10, 66, 13, 11, 9, 14, 14, 14, 6, 69, 60, 2, 4, ''], ['Def', 'Travis', 'Major', 18, 10, 62, 35, 13, 11, 10, 5, 10, 2, 61, 52, 1, 3, ''], ['Mid', 'Ace', 'Norcross', 29, 3, 63, 35, 6, 5, 20, 12, 11, 5, 52, 55, 1, 1, ''], ['Mid', 'Paisley', 'Watson', 35, 9, 51, 37, 9, 6, 7, 16, 16, 8, 55, 44, 1, 2, ''], ['Mid', 'Louis', 'Parry', 19, 6, 53, 69, 6, 6, 13, 19, 11, 1, 56, 50, 1, 2, ''], ['Mid', 'Antoni', 'Atterbury', 22, 9, 63, 69, 16, 7, 11, 20, 12, 4, 72, 59, 3, 5, ''], ['Mid', 'Dana', 'Njoku', 23, 5, 37, 45, 9, 18, 18, 11, 16, 3, 52, 76, 3, 1, ''], ['Mid', 'Shay', 'Ealy', 32, 7, 44, 60, 20, 20, 14, 19, 16, 6, 74, 88, 3, 5, ''], ['Mid', 'Josh', 'Nickel', 33, 9, 41, 38, 8, 9, 18, 16, 19, 5, 52, 66, 1, 1, ''], ['Mid', 'Ethan', 'Archer', 30, 7, 54, 63, 13, 15, 13, 20, 13, 5, 68, 72, 1, 4, ''], ['Ata', 'Alfa  ', 'Ali', 23, 5, 8, 70, 6, 6, 11, 14, 14, 6, 65, 46, 1, 4, ''], ['Ata', 'Corvert', 'Asher', 31, 7, 7, 63, 15, 7, 9, 20, 16, 6, 72, 57, 3, 5, ''], ['Ata', 'Genard', 'Read', 25, 10, 8, 67, 16, 14, 7, 20, 17, 4, 75, 66, 3, 6, ''], ['Ata', 'Donald', 'Parry', 30, 1, 3, 50, 15, 8, 17, 6, 16, 5, 62, 64, 3, 3, ''], ['Ata', 'Goran', 'Meyer', 33, 6, 6, 60, 11, 13, 9, 12, 15, 7, 66, 58, 1, 4, '']]
 
-    developmentsquad = [['Gk', 'Randy', 'Adey', 20, 50, 5, 10, 17, 9, 18, 7, 11, 4, 57, 66, 1, 1, ''], ['Gk', 'Omar', 'Bolton', 20, 69, 8, 6, 8, 7, 17, 8, 13, 2, 65, 54, 1, 1, ''], ['Def', 'Tank', 'Ireland', 19, 9, 67, 12, 12, 7, 10, 14, 5, 2, 63, 47, 1, 1, ''], ['Def', 'Miguel', 'Thomon', 20, 3, 55, 18, 8, 15, 15, 12, 18, 3, 59, 68, 1, 1, ''], ['Mid', 'Jan', 'Laing', 18, 6, 48, 45, 16, 9, 11, 17, 11, 1, 57, 60, 1, 1, ''], ['Mid', 'Hans', 'Swenney', 22, 7, 66, 48, 10, 19, 9, 15, 13, 4, 62, 66, 1, 1, ''], ['Ata', 'Minik', 'Watson', 18, 1, 4, 68, 11, 5, 11, 12, 20, 1, 65, 51, 1, 1, ''], ['Ata', 'Hugo', 'Bello', 22, 6, 1, 64, 17, 5, 5, 11, 18, 6, 71, 46, 1, 1, '']]
+    #developmentsquad = [['Gk', 'Randy', 'Adey', 20, 50, 5, 10, 17, 9, 18, 7, 11, 4, 57, 66, 1, 1, ''], ['Gk', 'Omar', 'Bolton', 20, 69, 8, 6, 8, 7, 17, 8, 13, 2, 65, 54, 1, 1, ''], ['Def', 'Tank', 'Ireland', 19, 9, 67, 12, 12, 7, 10, 14, 5, 2, 63, 47, 1, 1, ''], ['Def', 'Miguel', 'Thomon', 20, 3, 55, 18, 8, 15, 15, 12, 18, 3, 59, 68, 1, 1, ''], ['Mid', 'Jan', 'Laing', 18, 6, 48, 45, 16, 9, 11, 17, 11, 1, 57, 60, 1, 1, ''], ['Mid', 'Hans', 'Swenney', 22, 7, 66, 48, 10, 19, 9, 15, 13, 4, 62, 66, 1, 1, ''], ['Ata', 'Minik', 'Watson', 18, 1, 4, 68, 11, 5, 11, 12, 20, 1, 65, 51, 1, 1, ''], ['Ata', 'Hugo', 'Bello', 22, 6, 1, 64, 17, 5, 5, 11, 18, 6, 71, 46, 1, 1, '']]
 
 
     #undrafted_rookies=[['Gk', 'Mychal', 'Hawkins', 22, 80, 1, 2, 10, 18, 5, 17, 11, 1, 68, 69, 1, 0,''], ['Ata', 'Ari', 'Cox', 35, 7, 6, 80, 10, 8, 16, 16, 17, 1, 68, 64, 2, 0,''], ['Ata', 'Wayne', 'Bauer', 20, 1, 9, 75, 16, 9, 12, 16, 20, 1, 68, 63, 2, 0,''],['Gk', 'Mychal1', 'Hawkins1', 22, 80, 1, 2, 10, 18, 5, 17, 11, 1, 68, 69, 1, 0,''], ['Ata', 'Ari1', 'Cox1', 24, 7, 6, 80, 10, 8, 16, 16, 17, 1, 68, 30, 2, 0,''], ['Ata', 'Wayne1', 'Bauer1', 24, 1, 9, 75, 16, 9, 12, 16, 20, 1, 40, 40, 2, 0,'']]
     undrafted_rookies=[['Gk', 'Mychalg', 'Hawkins', 22, 81, 1, 2, 10, 18, 5, 17, 11, 1, 67, 69, 1, 0,''], ['Def', 'Arid', 'Coxd', 18, 7, 6, 82, 10, 8, 16, 16, 17, 1, 70, 64, 2, 0,''], ['Mid', 'Waynem', 'Bauer', 20, 1, 9, 75, 16, 9, 12, 16, 20, 1, 68, 63, 2, 0,''],['Ata', 'Mychala', 'Hawkins1', 22, 83, 1, 2, 10, 18, 5, 17, 11, 1, 74, 69, 1, 0,''], ['Ata', 'Ari1', 'Cox1', 24, 7, 6, 85, 10, 8, 16, 16, 17, 1, 77, 30, 2, 0,''], ['Ata', 'Wayne1', 'Bauer1', 24, 1, 9, 75, 16, 9, 12, 16, 20, 1, 40, 40, 2, 0,'']]
 
 
-    draft_clearup ()
-    squad,developmentsquad=sign_uncontractedplayers(squad,developmentsquad)
+    #draft_clearup ()
+    #squad,developmentsquad=sign_uncontractedplayers(squad,developmentsquad)
+
+    
+    developmentsquad=[['Gk', 'Ahmed', 'Banks', 24, 61, 9, 1, 18, 11, 5, 17, 11, 1, 66, 56, 1, 1, ''], ['Gk', 'Brogan', 'Rice', 19, 70, 10, 6, 11, 6, 16, 20, 19, 2, 72, 64, 1, 1, ''], ['Def', 'Alexis', 'Ford', 19, 10, 52, 33, 14, 16, 13, 7, 14, 2, 60, 68, 1, 1, ''], ['Def', 'Ada', 'Smith', 21, 3, 65, 25, 9, 11, 6, 18, 5, 2, 60, 46, 1, 1, ''], ['Mid', 'Martin', 'Abacus', 19, 2, 63, 55, 18, 18, 11, 19, 5, 1, 68, 74, 1, 1, ''], ['Mid', 'Ada', 'Ireland', 23, 6, 44, 48, 20, 14, 6, 17, 10, 3, 62, 64, 1, 1, ''], ['Ata', 'Alfa  ', 'Amor', 19, 8, 3, 63, 10, 14, 20, 20, 5, 1, 64, 80, 1, 1, ''], ['Ata', 'Carlos', 'Harper', 22, 8, 4, 54, 9, 14, 9, 14, 11, 3, 56, 56, 1, 1, '']]
+    print (developmentsquad) 
+
+    draft_clearup (developmentsquad)
+    
+    print (developmentsquad) 
 
 
 
