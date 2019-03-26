@@ -158,7 +158,7 @@ def caculate_individal_rating(player):
 
     player_negative_value=100-individual_player_rating
     if individual_player_age >35:
-        player_negative_value=player_negative_value+570
+        player_negative_value=player_negative_value+1000
     elif individual_player_age >33:
         player_negative_value=player_negative_value+40
     elif individual_player_age >30:
@@ -372,10 +372,19 @@ def actually_print_changes():
             #not printing player with minor changes 
 
 
-def change_soft_skills(fitness,deter,char,luck,skilincrease):
+def change_soft_skills(fitness,deter,char,luck,skilincrease,age):
+
+    if age >36:
+        reduced_fitness=round(fitness/4)
+        fitness=fitness-reduced_fitness
+        if fitness < 1:
+            fitness =1
+        return (fitness,deter,char,luck)
+
 
     random_list=[]
     lskilincrease=skilincrease/2
+
     if int(lskilincrease) < 2:
         lskilincrease=random.randint(1,2)
 
@@ -468,7 +477,7 @@ def training(season, game, defscore, atascore, squad,devsquad,experience_gained)
 
 
         #add exp, was a function but getting odd errors later on with  caculate_positionrating()recaculating vtt before i need 
-        
+        player_age=lplayer[3]
         players_exp=lplayer[12]
         players_exp+=int(experience_gained)
         lplayer[12]=int(players_exp)
@@ -482,7 +491,7 @@ def training(season, game, defscore, atascore, squad,devsquad,experience_gained)
 
             # change fitness/deter/char/luck (skillincrease/2 as points will go into one of these attributes)
 
-            lplayer[7],lplayer[10],lplayer[9],lplayer[11]=change_soft_skills(fitness=lplayer[7],deter=lplayer[10],char=lplayer[9],luck=lplayer[11],skilincrease=skilincrease)
+            lplayer[7],lplayer[10],lplayer[9],lplayer[11]=change_soft_skills(fitness=lplayer[7],deter=lplayer[10],char=lplayer[9],luck=lplayer[11],skilincrease=skilincrease,age=player_age)
            # org_vtt=lplayer[13]
             if individual_player_position=="Gk":
                 skill_level=lplayer[4]
@@ -570,6 +579,8 @@ def training(season, game, defscore, atascore, squad,devsquad,experience_gained)
 
         else:
             #lose of points
+            if player_age >36:
+                lplayer[7],lplayer[10],lplayer[9],lplayer[11]=change_soft_skills(fitness=lplayer[7],deter=lplayer[10],char=lplayer[9],luck=lplayer[11],skilincrease=skilincrease,age=player_age)
             if individual_player_position=="Gk":
                 skill_level=lplayer[4]
                 new_skill_level=skill_level-random_number_loss

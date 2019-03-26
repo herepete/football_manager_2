@@ -20,8 +20,8 @@ def season(season, game, defscore, atascore, squad):
     #build opp score 
     opposition_skill=[]
     for i in range(0,16):
-        random_defscore=random.randint(65,95)
-        random_atascore=random.randint(65,95)
+        random_defscore=random.randint(65,85)
+        random_atascore=random.randint(65,85)
         random_opps=[random_defscore,random_atascore]
         opposition_skill.append(random_opps)
 

@@ -39,7 +39,7 @@ maxage = 35
 firstrounddraftpicks = 1
 secondrounddraftpicks = 1
 thirdrounddraftpicks = 1
-seasonstoplay = 5
+seasonstoplay = 10
 maxskillofinitalteam = 5
 minskillofinitalteam = 1
 

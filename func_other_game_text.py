@@ -56,7 +56,7 @@ Good luck & enjoy :)
     if printrules=="n":
 
         userinput = input(
-            "Press a to enter advanced settings or press enter to continue start the game\n")
+            "Press enter to continue start the game\n")
 
         if userinput == "a":
             while True:

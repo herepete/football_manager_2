@@ -1315,6 +1315,8 @@ def enter_draft(picks,squad,developmentsquad):
                             #who_to_replace_list=enumerate(who_to_replace_list)
 
                             func_other_format_input.printplayers(squad,vtt="y",draft="yd",outputlimit=100,justpostion=posttion_new_draft_pick)
+
+
                             if posttion_new_draft_pick=="Gk":
                                 min_post_num=0
                                 max_post_num=2
@@ -2182,6 +2184,12 @@ def sign_uncontractedplayers(squad,developmentsquad):
                 input("Bad input please try again...Press a button to continue")
                 #breakpoint()
 
+def record_signing_player(ppostion,pname,playerdraftinfo,playersoldinfo=""):
+
+    global player_history
+    player_history=[]
+
+    player_history.append[ppostion,pname,playerdraftinfo,playersoldinfo]
 
 
 
@@ -2223,16 +2231,19 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         first_round_pn=random.randint(8,13)
     elif int(normal_season_wins) < 10:
         first_round_pn=random.randint(14,15)
-    elif int(playoff_wins==1):
+    elif int(playoff_wins==0):
         first_round_pn=random.randint(16,24)
-    elif int(playoff_wins==2):
+    elif int(playoff_wins==1):
         first_round_pn=random.randint(24,28)
-    elif int(playoff_wins==3):
+    elif int(playoff_wins==2):
         first_round_pn=random.randint(29,30)
-    elif int(playoff_wins==4):
+    elif int(playoff_wins==3):
         first_round_pn=31
-    elif int(playoff_wins==5):
+    elif int(playoff_wins==4):
         first_round_pn=32
+    else:
+        input ("Err, not sure on whcih pick number to give you")
+        breakpoint()
     
     
     all_round_pn.append(first_round_pn)
@@ -2434,6 +2445,8 @@ if __name__=="__main__":
 
     defscore=99
     atascore=99
+
+
 
     squad= [['Gk', 'Leon', 'Thomon', 27, 54, 1, 1, 8, 14, 13, 19, 9, 5, 61, 62, 1, 3, ''], ['Gk', 'Milan', 'Gill', 29, 69, 8, 10, 18, 7, 11, 15, 16, 6, 77, 60, 1, 6, ''], ['Gk', 'Phil', 'French', 22, 66, 1, 1, 5, 6, 13, 18, 19, 4, 67, 52, 1, 4, ''], ['Def', 'Davit', 'Newbury', 27, 3, 51, 29, 14, 9, 8, 15, 6, 5, 59, 50, 1, 2, ''], ['Def', 'Brogan', 'Whitehouse', 30, 2, 59, 26, 6, 16, 9, 8, 20, 7, 62, 58, 1, 3, ''], ['Def', 'Louis', 'Stewart', 26, 8, 70, 14, 7, 6, 8, 10, 9, 5, 62, 38, 3, 3, ''], ['Def', 'Mychal', 'Scott', 35, 6, 54, 26, 5, 17, 15, 20, 6, 8, 60, 66, 1, 3, ''], ['Def', 'Ada', 'Green ', 27, 3, 60, 32, 6, 17, 18, 14, 11, 7, 64, 71, 2, 3, ''], ['Def', 'Ace', 'Njoku', 18, 2, 63, 23, 16, 5, 11, 6, 6, 1, 62, 46, 2, 3, ''], ['Def', 'Luke ', 'Edge', 27, 10, 66, 13, 11, 9, 14, 14, 14, 6, 69, 60, 2, 4, ''], ['Def', 'Travis', 'Major', 18, 10, 62, 35, 13, 11, 10, 5, 10, 2, 61, 52, 1, 3, ''], ['Mid', 'Ace', 'Norcross', 29, 3, 63, 35, 6, 5, 20, 12, 11, 5, 52, 55, 1, 1, ''], ['Mid', 'Paisley', 'Watson', 35, 9, 51, 37, 9, 6, 7, 16, 16, 8, 55, 44, 1, 2, ''], ['Mid', 'Louis', 'Parry', 19, 6, 53, 69, 6, 6, 13, 19, 11, 1, 56, 50, 1, 2, ''], ['Mid', 'Antoni', 'Atterbury', 22, 9, 63, 69, 16, 7, 11, 20, 12, 4, 72, 59, 3, 5, ''], ['Mid', 'Dana', 'Njoku', 23, 5, 37, 45, 9, 18, 18, 11, 16, 3, 52, 76, 3, 1, ''], ['Mid', 'Shay', 'Ealy', 32, 7, 44, 60, 20, 20, 14, 19, 16, 6, 74, 88, 3, 5, ''], ['Mid', 'Josh', 'Nickel', 33, 9, 41, 38, 8, 9, 18, 16, 19, 5, 52, 66, 1, 1, ''], ['Mid', 'Ethan', 'Archer', 30, 7, 54, 63, 13, 15, 13, 20, 13, 5, 68, 72, 1, 4, ''], ['Ata', 'Alfa  ', 'Ali', 23, 5, 8, 70, 6, 6, 11, 14, 14, 6, 65, 46, 1, 4, ''], ['Ata', 'Corvert', 'Asher', 31, 7, 7, 63, 15, 7, 9, 20, 16, 6, 72, 57, 3, 5, ''], ['Ata', 'Genard', 'Read', 25, 10, 8, 67, 16, 14, 7, 20, 17, 4, 75, 66, 3, 6, ''], ['Ata', 'Donald', 'Parry', 30, 1, 3, 50, 15, 8, 17, 6, 16, 5, 62, 64, 3, 3, ''], ['Ata', 'Goran', 'Meyer', 33, 6, 6, 60, 11, 13, 9, 12, 15, 7, 66, 58, 1, 4, '']]
 
