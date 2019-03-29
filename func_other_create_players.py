@@ -270,10 +270,11 @@ def buildplayer(position, numberofplayer, qualityofplayer, maxageofplayer, minag
         #pa=""
 
 #contract (in years)
-        if developmentsquad=="y" or age >32:
-            contract=1
-        else:
-            contract=random.randint(1,3)
+        #if developmentsquad=="y" or age >32:
+        #    contract=1
+        #else:
+        #    contract=random.randint(1,3)
+        contract=1
 
 
 # wage (in years)

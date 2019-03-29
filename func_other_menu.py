@@ -164,6 +164,23 @@ As per the Nfl when a draft prospect from the 1st round reaches the end of the a
 
     """)
 
+def  special_char ():
+
+    print ("""
+
+    Special chars meaning, by default is blank
+                               Notes
+    D =Drafted                 Means a better renewal wage unless they fall into GT/ST status
+    U =Undrafted 
+    ST=Special trainer         player_exp+player_ablity+player_char)> 48 , Large help in potential improvements to other team mates in same position as player
+    GT=Good trainer            player_exp+player_ablity+player_char)> 43   helps in potential improvements to other team mates in same position as player
+
+
+
+
+
+    """)
+
 def menu(oursquad, formation, printoutput):
 
     '''
@@ -177,7 +194,7 @@ def menu(oursquad, formation, printoutput):
 
     #os.system('clear')
 
-    useroption=input("For help on ... Press:\nr for rules\na for player attribute breakdown\nf for finance \nd for draft logic\nt for training info \ne End of Season -Draft\nds for Development + Squad\npc for Players contracts\npp Caculating player Potential\npv Caculating players value to team (vtt)\n")
+    useroption=input("For help on ... Press:\nr for rules\na for player attribute breakdown\nf for finance \nd for draft logic\nt for training info \ne End of Season -Draft\nds for Development + Squad\npc for Players contracts\npp Caculating player Potential\npv Caculating players value to team (vtt)\nsc Special Char notes")
     
     if useroption == "d" or useroption == "r":
         input ("To code")
@@ -204,6 +221,9 @@ def menu(oursquad, formation, printoutput):
         input ("\nPress enter to continue")
     elif useroption == "f":
         finance_report(oursquad)
+        input ("\nPress enter to continue")
+    elif useroption == "sc":
+        special_char()
         input ("\nPress enter to continue")
     else:
         print ("Nothing entered")

@@ -37,6 +37,10 @@ global atascore
 global formation
 formation=func_other_game_settings.defaultformation
 
+global player_history
+player_history=[]
+
+
 
 '''
 <explain input>
@@ -215,18 +219,22 @@ def value_players(vtt,age):
         player_value=player_value+100
     elif player_value-age < 24:
         player_value=player_value+50
-    elif age == 30 and player_value >1800:
-        player_value=1600
-    elif age == 31 and player_value >1500:
-        player_value=1250
-    elif age == 32 and player_value >1000:
-        player_value=1000
-    elif age == 33 and player_value >800:
-        player_value=800
-    elif age == 34 and player_value >550:
-        player_value=550
-    elif age == 35 and player_value >340:
-        player_value=340
+    elif age == 28 and player_value >850:
+        player_value=850
+    elif age == 29 and player_value >720:
+        player_value=720
+    elif age == 30 and player_value >590:
+        player_value=590
+    elif age == 31 and player_value >530:
+        player_value=530
+    elif age == 32 and player_value >500:
+        player_value=500
+    elif age == 33 and player_value >440:
+        player_value=440
+    elif age == 34 and player_value >400:
+        player_value=440
+    elif age == 35 and player_value >300:
+        player_value=300
     elif age == 36 and player_value >220:
         player_value=220
     elif age == 37 and player_value >150:
@@ -335,7 +343,7 @@ def swap_players(squad,all_round_pn,report="y",):
 
 def outofcontract_players(squad):
 
-    print ("\nHere are the Out of contract players...(you can renew/release players after the draft,output limited to 10 players)\n")
+    print ("\nHere are the Out of contract players...(you can renew/release players after the draft,output limited to 7 players)\n")
     outofcontract=[]
     temp_squad=squad.copy()
     for index,i in enumerate(temp_squad):
@@ -344,7 +352,7 @@ def outofcontract_players(squad):
     #220319
     outofcontract.sort(key=lambda flawedcreatedraft: flawedcreatedraft[13], reverse=True)
 
-    func_other_format_input.printplayers(outofcontract,draft="n",outputlimit=10,justpostion="")
+    func_other_format_input.printplayers(outofcontract,draft="n",outputlimit=7,justpostion="")
 
 def money(squad):
 
@@ -591,6 +599,8 @@ def renewplayercontract(squad,developmentsquad):
                    playertochange=int(playertochange)
                    playertorenew=squad[playertochange]
                    playertorenew_age=playertorenew[3]
+                   playertorenew_sc=playertorenew[17]
+                    
                    vttvalue=playertorenew[13]
 
                    #renew players contract
@@ -616,9 +626,15 @@ def renewplayercontract(squad,developmentsquad):
                    else:
                     wage=10
                    if wage > 5:
-                       wage_p1=wage+4
-                       wage_p2=wage+3
-                       wage_p3=wage+2
+                       if playertorenew_sc=="D":
+                           print ("The player feels a loyalty to the team as we was drafted by you so he is willing to take a smaller contract that otherwise expected...")
+                           wage_p1=wage+0
+                           wage_p2=wage+0
+                           wage_p3=wage+0
+                       else:
+                           wage_p1=wage+4
+                           wage_p2=wage+3
+                           wage_p3=wage+2
                    else:
                        wage_p1=wage+3
                        wage_p2=wage+2
@@ -1311,6 +1327,8 @@ def enter_draft(picks,squad,developmentsquad):
                         if valid_answer1=="True":                  
                             posttion_new_draft_pick=createdraft[whom_to_draft]
                             posttion_new_draft_pick=posttion_new_draft_pick[0]
+                            posttion_name=createdraft[whom_to_draft][1] + " " + createdraft[whom_to_draft][2] 
+                            record_signing_player(ppostion=posttion_new_draft_pick,pname=posttion_name,playerdraftinfo=pick_num,playersoldinfo="")
                             #who_to_replace_list=squad.copy()
                             #who_to_replace_list=enumerate(who_to_replace_list)
 
@@ -1347,6 +1365,8 @@ def enter_draft(picks,squad,developmentsquad):
                                 player_to_delete1=int(userinput4)+add_values
                                 del squad[player_to_delete1]
                                 playerselected=createdraft[whom_to_draft]
+                                #playerdrafted
+                                playerselected[17]="D"
                                 #edit players contract length and wage to reflect draft position
                                 if pick_num <4:
                                     #15 =contract lenght , 16 =wage
@@ -1852,7 +1872,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                             func_other_format_input.printplayers(master_undrafted_rookies,draft="ydc",outputlimit=outputlimit,justpostion="")
                         elif userinput1a == "s":
                             print("These are the players you can sign ...(Ordered by Special skill)")
-                            outputlimit=30
+                            outputlimit=45
                             master_undrafted_rookies.sort(key=lambda master_undrafted_rookies: master_undrafted_rookies[17],reverse=True)
                             func_other_format_input.printplayers(master_undrafted_rookies,draft="ydc",outputlimit=outputlimit,justpostion="")
 
@@ -2054,6 +2074,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                                 player_to_delete2=int(userinput5)+add_values
                                 if under24_triggered==1:
                                     player_to_select_wages=under_24_temp_list[whom_to_sign_fa][16]
+                                    #playerselected6[17]="U"
                                 else:    
                                     player_to_select_wages=master_undrafted_rookies[whom_to_sign_fa][16]
                                 #logic on player to delete check wages and contract
@@ -2114,6 +2135,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                                         #player_to_delete2=player_to_delete2+add_values
                                         del squad[player_to_delete2]
                                         playerselected=under_24_temp_list[whom_to_sign_fa]
+                                        playerselected[17]="U"
                                         del master_undrafted_rookies[whom_to_sign_ur]
                                         #edit players contract length and wage to reflect draft position
                                         squad.insert(player_to_delete2,playerselected)
@@ -2187,9 +2209,10 @@ def sign_uncontractedplayers(squad,developmentsquad):
 def record_signing_player(ppostion,pname,playerdraftinfo,playersoldinfo=""):
 
     global player_history
-    player_history=[]
 
-    player_history.append[ppostion,pname,playerdraftinfo,playersoldinfo]
+    linebuild=season,ppostion,pname,playerdraftinfo,playersoldinfo
+    player_history.append(linebuild)
+    #print(player_history)
 
 
 
@@ -2259,7 +2282,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         os.system('clear')
         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
         #print("Press enter to continue or m for menu,p see draft potential,v for value to team \n,f for flawed genius y View your squad, d see Full Draft , r Renew players contracts ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
-        print("Press: \nh Help menu\nd Scout Draft\nv View your Squad\nx First XI Team Report\nr Change (out of contract players)\ne Enter draft(i.e Continue)\ns Sell a player\nm move up/down draft board ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
+        print("Press: \nh Help menu\td Scout Draft\tv View your Squad\tx First XI Team Report\tr Change (out of contract players)\te Enter draft(i.e Continue)\ts Sell a player\tm move up/down draft board\nhd History of draft ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
 
 
         if draft_already_created==0:
@@ -2282,6 +2305,22 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             breakpoint()
 
         userinput=input("")
+        if userinput=="hd":
+            os.system('clear')
+            func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
+            global player_history
+            print ("Previous draft picks")
+            #breakpoint()
+            print ("\nSeason  P   Name            Pick Num")
+            for i in player_history:
+                tseason=i[0]
+                tp=i[1]
+                tname=i[2]
+                tpicknumber=i[3]
+                print ('{:<7}{:<6}{:<16}{:<12}'.format(tseason,tp,tname,tpicknumber))
+
+            input()
+            continue
         if userinput=="h":
             os.system('clear')
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
@@ -2424,7 +2463,8 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         if userinput=="r":
             os.system('clear')
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
-            squad,developmentsquad=renewplayercontract(squad,developmentsquad)
+            #27032019
+            #squad,developmentsquad=renewplayercontract(squad,developmentsquad)
             input("Press a button to conitnue")
             continue
 

@@ -12,6 +12,7 @@ import os
 # Def sortourteam used by gameday to get our team scores , formation=442 at moment but trying to future proof,printoutput =print to screen
 # Def report, main item called
 
+
 def ourteamscores(ourfirstx1, printoutput, totalchar, totaldet, totalexp):
 
 
@@ -50,7 +51,7 @@ def ourteamscores(ourfirstx1, printoutput, totalchar, totaldet, totalexp):
      All the other (D/M/A....) are added together to get the masterdefscore
      the total is then *5 to make it out of 100 (just to make it nicer on the eyes)
     
-    '''
+    
 
     #gkd=
     #gks
@@ -159,6 +160,75 @@ def ourteamscores(ourfirstx1, printoutput, totalchar, totaldet, totalexp):
     masteratascore=totalatackscore = defavaluettoteam+midavaluettoteam+ataavaluettoteam+teamvaluetoteam
     #masterdefscore=totaldefensescore= 13
     #masteratascore=totalatackscore = 12
+    '''
+
+    # defensive skills
+    gkd = 0
+    defd = 0
+    midd = 0
+    atad = 0
+
+    #attacking skills
+    gka = 0
+    defa = 0
+    mida = 0
+    ataa = 0
+
+    gkinteam = 0
+    definteam = 0
+    midinteam = 0
+    atainteam = 0
+
+    fitscores = 0
+    expscores = 0
+    agescores = 0
+    chascores = 0
+    detscores = 0
+    lucscores = 0
+
+    for player in ourfirstx1:
+        # set variables
+        position = player[0]
+        ageskill = player[3]
+        gkskill = player[4]
+        defskill = player[5]
+        ataskill = player[6]
+        fitskill = player[7]
+        abiskill = player[8]
+        chaskill = player[9]
+        detskill = player[10]
+        lucskill = player[11]
+        expskill = player[12]
+        vttskill=player[13]
+
+        # globalvalues
+        fitscores = fitscores+int(fitskill)
+        expscores = expscores+int(expskill)
+        agescores = agescores+ageskill
+        chascores = chascores+int(chaskill)
+        detscores = detscores+int(detskill)
+        lucscores = lucscores+int(lucskill)
+
+        if position == "Gk":
+            gkd = gkd+int(vttskill)
+        if position == "Def":
+            defd = defd+int(vttskill)
+        if position == "Mid":
+            midd = midd+int(vttskill)
+        if position == "Ata":
+            ataa = ataa+int(vttskill)
+
+    fit_average = int(fitscores/11)
+    age_average = int(agescores/11)
+    cha_average = int(chascores/11)
+    det_average = int(detscores/11)
+    luc_average = int(lucscores/11)
+    exp_average = int(expscores/11)
+
+    masterdefscore=round((gkd+defd+(midd/4))/6)
+    masteratascore=round(((midd/4)+ataa)/3)
+    #print (masterdefscore,masteratascore)
+    #input()
 
     
 
@@ -322,12 +392,16 @@ def vtt(playerin):
 
     return(players_out,tempvtt)
 
-def special_player_check(player_exp,player_ablity,player_char):
+def special_player_check(player_exp,player_ablity,player_char,org_sc=""):
 
-    if (player_exp+player_ablity+player_char)> 46:
+    if (player_exp+player_ablity+player_char)> 48:
         return ("ST")
-    elif (player_exp+player_ablity+player_char)> 43:
+    elif (player_exp+player_ablity+player_char)> 41:
         return("GT")
+    elif org_sc=="D":
+        return ("D")
+    elif org_sc=="U":
+        return ("U")
     else:
         return("")
 
@@ -434,7 +508,7 @@ def sortourteam(oursquad, formation, printoutput):
         for j in  i: 
             #breakpoint()
             position = j
-            special_result=special_player_check(player_exp,player_ablity,player_char)
+            special_result=special_player_check(player_exp,player_ablity,player_char,org_sc=i[17])
             i[17]=special_result
 
 

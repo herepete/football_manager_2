@@ -49,13 +49,24 @@ def game_logic(opp_skill_ata,defscore,atascore,opp_skill_def):
     
     else:
     #draw
-        drawresult=random.randint(0,1)
-        if drawresult==1:
-            print (" Game Won - in overtime")
-            return(1)
+        drawresult_us=defscore+atascore
+        drawresult_opp=opp_skill_ata+opp_skill_def
+        if drawresult_us >=drawresult_opp:
+            drawresult=random.randint(0,2)
+            if drawresult>0:
+                print (" Game Won - in overtime")
+                return(1)
+            else:
+                print (" Game lost - in overtime")
+                return(0)
         else:
-            print (" Game lost - in overtime")
-            return(0)
+            drawresult=random.randint(0,1)
+            if drawresult==1:
+                print (" Game Won - in overtime")
+                return(1)
+            else:
+                print (" Game lost - in overtime")
+                return(0)
 
 
 def playoff(season, game, defscore, atascore, squad,gameswon=9):
@@ -78,9 +89,10 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
         input("Entering Season play offs")
 
         input ("\nEntering Wild card weekend, hit enter to continue")
-        wildcard_def=random.randint(70,90)
-        wildcard_ata=random.randint(70,90)
+        wildcard_def=random.randint(70,80)
+        wildcard_ata=random.randint(70,80)
         won_game=game_logic(opp_skill_ata=wildcard_ata,defscore=defscore,atascore=atascore,opp_skill_def=wildcard_def)
+        print (wildcard_def,wildcard_ata)
         if won_game == 0:
             input ("Unlucky try again next season...")
             return (lose_in_wildcard_exp,playoffwins)
@@ -89,9 +101,10 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
             playoffwins+=1
 
     input ("\nEntering Diviosnal weekend, hit enter to continue")
-    divisional_def=random.randint(75,95)
-    divisional_ata=random.randint(75,95)
+    divisional_def=random.randint(75,85)
+    divisional_ata=random.randint(75,85)
     won_game=game_logic(opp_skill_ata=divisional_ata,defscore=defscore,atascore=atascore,opp_skill_def=divisional_def)
+    print (divisional_def,divisional_ata)
     if won_game == 0:
         input ("Unlucky try again next season...")
         return (lose_in_wildcard_exp,playoffwins)
@@ -101,9 +114,10 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
 
 
     input ("\nEntering Conference game, hit enter to continue")
-    conference_def=random.randint(80,95)
-    conference_ata=random.randint(80,95)
+    conference_def=random.randint(83,93)
+    conference_ata=random.randint(83,90)
     won_game=game_logic(opp_skill_ata=conference_ata,defscore=defscore,atascore=atascore,opp_skill_def=conference_def)
+    print (conference_def,conference_ata)
     if won_game == 0:
         input ("Unlucky try again next season...")
         return (lose_in_wildcard_exp,playoffwins)
@@ -112,9 +126,10 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
 
 
     input ("\nEntering Superbowl game, hit enter to continue")
-    superbowl_def=random.randint(85,100)
-    superbowl_ata=random.randint(85,100)
+    superbowl_def=random.randint(90,100)
+    superbowl_ata=random.randint(90,100)
     won_game=game_logic(opp_skill_ata=superbowl_ata,defscore=defscore,atascore=atascore,opp_skill_def=superbowl_def)
+    print (superbowl_def,superbowl_ata)
     if won_game == 0:
         input ("Unlucky try again next season...")
         return (lose_in_superblowl,playoffwins)

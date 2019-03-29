@@ -11,13 +11,13 @@ in general its best not to mess with them, as no real testing has taken place on
 
 maxbudget = 120 #recomemned 100
 picksperyearmax=5 # to high and you can change to much of your team, to low i.e below 4 will probable produce weird issues
-quality_of_draft=85
+quality_of_draft=80
 size_of_draft_gk=40 # there are 96 picks in the draft so a good spread is needed recommend each number no lower than 40
 size_of_draft_def=60 # see above
 size_of_draft_mid=60 # see above
 size_of_draft_ata=40 # see above
 size_of_undrafted_class=300 # this is max size of undrafted and free agent players any more than this number will be removed
-inital_top_range_player=70 # of initally created team, highest should be 99, the lower it is during the first season you will have a lot of money to upgrade in free agency
+inital_top_range_player=65 # of initally created team, highest should be 99, the lower it is during the first season you will have a lot of money to upgrade in free agency
 #inital_top_range_player=99 # of initally created team, highest should be 99, the lower it is during the first season you will have a lot of money to upgrade in free agency
 inital_top_range_player_freeagency=90
 freeagency_gk=15
