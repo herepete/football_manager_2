@@ -1,7 +1,6 @@
 # football_manager_2
 The latest and greatest
 
-From the script
 
 Welcome to Football Manager Draft
 ===============
