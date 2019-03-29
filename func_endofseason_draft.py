@@ -627,18 +627,32 @@ def renewplayercontract(squad,developmentsquad):
                     wage=10
                    if wage > 5:
                        if playertorenew_sc=="D":
-                           print ("The player feels a loyalty to the team as we was drafted by you so he is willing to take a smaller contract that otherwise expected...")
+                           print ("\nThe player feels a loyalty to the team as we was drafted by you so he is willing to take a smaller contract than otherwise expected...")
                            wage_p1=wage+0
                            wage_p2=wage+0
                            wage_p3=wage+0
+                       elif playertorenew_sc=="U":
+                           print ("\nThe player feels a semi-loyalty to the team as we was drafted by you so he is willing to take a slightly smaller contract than otherwise expected...")
+                           wage_p1=wage+1
+                           wage_p2=wage+1
+                           wage_p3=wage+2
+
                        else:
                            wage_p1=wage+4
                            wage_p2=wage+3
                            wage_p3=wage+2
                    else:
-                       wage_p1=wage+3
-                       wage_p2=wage+2
-                       wage_p3=wage+1
+                       if playertorenew_sc=="U":
+                           print ("\nThe player feels a semi-loyalty to the team as we was drafted by you so he is willing to take a slightly smaller contract than otherwise expected...")
+                           wage_p1=wage-1
+                           wage_p2=wage+0
+                           wage_p3=wage+1
+                           wage+=1
+
+                       else:
+                           wage_p1=wage+0
+                           wage_p2=wage+1
+                           wage_p3=wage+3
                    if wage >1:
                        wage_m1=wage-1
                    if int(playertorenew_age)>32:
@@ -2277,6 +2291,35 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
     
     breakhit=0
     draft_already_created=0
+
+    #salary cap breached, bad user
+    bb1=""
+    bb2=""
+    bb1,bb2,bad_ness=func_other_menu.finance_report(squad,returnv="y")
+    if bad_ness < -15:
+        #delete first round pick
+        print ("Because you have massivley breached salary cap rules you have had your first round pick removed")
+        input()
+        input()
+        del all_round_pn[0]
+    elif bad_ness < -10:
+        print ("Because you have breached salary cap rules you have had your second round pick removed")
+        input()
+        input()
+        #delete second round pick
+        del all_round_pn[1]
+    elif bad_ness < -5:
+        print ("Because you have breached salary cap rules you have had your third round pick removed")
+        input()
+        input()
+        #delete third round pick
+        all_round_pn.pop()
+    else:
+        pass
+
+
+
+
 
     while True:
         os.system('clear')

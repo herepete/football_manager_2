@@ -52,7 +52,7 @@ def season(season, game, defscore, atascore, squad):
                 gf=1
             gf=random.randint(0,gf)
 
-            print ("us - %s , opp-%s" %(gf,ga),end="")
+            print ("us - %s , opp-%s oppd-%s oppa-%s" %(gf,ga,opp_skill_def,opp_skill_ata),end="")
 
             if int(ga) > int(gf):
                 pass
@@ -64,8 +64,20 @@ def season(season, game, defscore, atascore, squad):
                 print (" Game Won")
             else:
                 #draw
-                drawresult=random.randint(0,1)
-                if drawresult==1:
+                opp_score=opp_skill_def+opp_skill_ata
+                our_score=defscore+atascore
+                difference_score=our_score-opp_score
+                if difference_score >20:
+
+                    drawresult=random.randint(0,3)
+                elif difference_score >10:
+                
+                    drawresult=random.randint(0,2)
+                else: 
+                    drawresult=random.randint(0,1)
+                    
+                
+                if drawresult>0:
                     ourwins+=1
                     print (" Game Won - in overtime")
                 else:

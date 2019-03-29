@@ -51,22 +51,20 @@ def game_logic(opp_skill_ata,defscore,atascore,opp_skill_def):
     #draw
         drawresult_us=defscore+atascore
         drawresult_opp=opp_skill_ata+opp_skill_def
-        if drawresult_us >=drawresult_opp:
+        difference_score=drawresult_us-drawresult_opp
+
+        if drawresult_us >20:
             drawresult=random.randint(0,2)
-            if drawresult>0:
-                print (" Game Won - in overtime")
-                return(1)
-            else:
-                print (" Game lost - in overtime")
-                return(0)
+        elif drawresult_us >10:
+            drawresult=random.randint(0,2)
         else:
             drawresult=random.randint(0,1)
-            if drawresult==1:
-                print (" Game Won - in overtime")
-                return(1)
-            else:
-                print (" Game lost - in overtime")
-                return(0)
+        if drawresult>0:
+            print (" Game Won - in overtime")
+            return(1)
+        else:
+            print (" Game lost - in overtime")
+            return(0)
 
 
 def playoff(season, game, defscore, atascore, squad,gameswon=9):
@@ -101,8 +99,8 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
             playoffwins+=1
 
     input ("\nEntering Diviosnal weekend, hit enter to continue")
-    divisional_def=random.randint(75,85)
-    divisional_ata=random.randint(75,85)
+    divisional_def=random.randint(75,83)
+    divisional_ata=random.randint(75,83)
     won_game=game_logic(opp_skill_ata=divisional_ata,defscore=defscore,atascore=atascore,opp_skill_def=divisional_def)
     print (divisional_def,divisional_ata)
     if won_game == 0:
@@ -114,7 +112,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
 
 
     input ("\nEntering Conference game, hit enter to continue")
-    conference_def=random.randint(83,93)
+    conference_def=random.randint(83,90)
     conference_ata=random.randint(83,90)
     won_game=game_logic(opp_skill_ata=conference_ata,defscore=defscore,atascore=atascore,opp_skill_def=conference_def)
     print (conference_def,conference_ata)
@@ -126,8 +124,8 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
 
 
     input ("\nEntering Superbowl game, hit enter to continue")
-    superbowl_def=random.randint(90,100)
-    superbowl_ata=random.randint(90,100)
+    superbowl_def=random.randint(85,100)
+    superbowl_ata=random.randint(85,100)
     won_game=game_logic(opp_skill_ata=superbowl_ata,defscore=defscore,atascore=atascore,opp_skill_def=superbowl_def)
     print (superbowl_def,superbowl_ata)
     if won_game == 0:

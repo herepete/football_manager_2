@@ -18,10 +18,13 @@ def finance_report(oursquad,returnv="n"):
         players_wages+=wage
     
     if returnv=="n":
+        money_left=maxbudget-players_wages
+        if money_left <20:
+            print ("*** Note if you breach the salary cap rules you will get deducted a draft pick in the next season***")
         print ("Finance report")
         print ("Budget=",maxbudget)
         print ("Players wages=",players_wages)
-        print ("Money left over=",maxbudget-players_wages)
+        print ("Money left over=",money_left)
     else:
         return(maxbudget,players_wages,maxbudget-players_wages)
 
@@ -125,6 +128,8 @@ from func_other_teamreport.vtt
 def players_contracts():
 
     print("""
+
+    *** Note if you breach the salary cap rules you will get deducted a draft pick in the next season***
     Subject to change but 
 
 VTT(contract-renewal) VTT(Free Agents) Wage  Contract(for draft players)     Notes
@@ -150,13 +155,12 @@ Notes
 ====
 
 you may have to pay a higher salary if you are replacing a player with 1 year or more left on the contract or a wage of above 1
-1 year contract renewal has a preium of +1 (unless wage is 5 and then its +2)
-2 year contract as above
-3 year contract renewal -1
+depending upon a player special skills (i.e if drafted by the team or undrafted you will get a reduction in wage demands)
+You can offer a 1/2/3 or 4 year contract
 
 As above the top Tier of Free agents have a premium
 
-Over age of 32 free agents you can initally only sign on a 1 year
+Free agents you can initally only sign on a 1 year (to stop you signing a very good player and trading him away in the next season)
 
 The idea is to get you to draft young players and make them the nucules of your squad
 A few Free agents spinglinged here and there can improve a team

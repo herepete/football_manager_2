@@ -26,6 +26,7 @@ freeagency_mid=20
 freeagency_ata=15
 startseason = 1 # needs to be less than season to play
 auto_save_game="y" # else = no, game is saved at end of every season
+seasonstoplay = 20
 
 
 # used in testing
@@ -39,7 +40,6 @@ maxage = 35
 firstrounddraftpicks = 1
 secondrounddraftpicks = 1
 thirdrounddraftpicks = 1
-seasonstoplay = 10
 maxskillofinitalteam = 5
 minskillofinitalteam = 1
 
