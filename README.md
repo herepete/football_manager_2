@@ -1,13 +1,7 @@
 # football_manager_2
 The latest and greatest
 
-From the script
 
-Intro >>> Season >>> Play Off's >>> End of Season -Training >>> End of Season -Draft >>> End of game
-Season 1 Game 0
-First XI Defensive score  59
-First XI Attacking score  53
-##################################
 Welcome to Football Manager Draft
 ===============
 This game is a mashup of football and NFL
