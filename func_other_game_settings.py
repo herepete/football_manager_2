@@ -11,7 +11,7 @@ in general its best not to mess with them, as no real testing has taken place on
 
 maxbudget = 120 #recomemned 100
 picksperyearmax=5 # to high and you can change to much of your team, to low i.e below 4 will probable produce weird issues
-quality_of_draft=80
+quality_of_draft=83
 size_of_draft_gk=40 # there are 96 picks in the draft so a good spread is needed recommend each number no lower than 40
 size_of_draft_def=60 # see above
 size_of_draft_mid=60 # see above

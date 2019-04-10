@@ -8,12 +8,22 @@ global previous_results
 previous_results=[]
 
 
-def season(season, game, defscore, atascore, squad):
+def season(season, game, defscore, atascore, squad,previousseasonresults):
     '''
     This is where the standard season starts
     input = season, game, defscore, atascore, squad)
     output = un-determined
     '''
+
+    #check if we have previous season results (i.e from a loaded game and if so use them)
+    #if not previousseasonresults:
+        #i.e empty
+        #print("no results")
+     #   pass
+    #else:
+     #   previous_results=previousseasonresults
+
+    #breakpoint()
 
     ourwins=0
    
@@ -90,6 +100,16 @@ def season(season, game, defscore, atascore, squad):
         print ("Games Won ",ourwins)
 
         global previous_results
+
+    #check if we have previous season results (i.e from a loaded game and if so use them)
+        if not previousseasonresults:
+            #i.e empty
+            #print("no results")
+            pass
+        else:
+            previous_results=previousseasonresults
+
+
         temp_results=[season,ourwins, defscore, atascore]
         previous_results.append(temp_results)
 
@@ -112,7 +132,8 @@ def season(season, game, defscore, atascore, squad):
             func_other_menu.menu(oursquad=squad, formation=1442, printoutput="y")
         else:
             break
-    return ourwins
+    #breakpoint()
+    return (ourwins,previous_results)
         
 
 if __name__=="__main__":

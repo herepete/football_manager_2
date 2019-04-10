@@ -65,6 +65,7 @@ def s_game():
     save_details.append(last_seasons_post)
     save_details.append(players)
     save_details.append(developmentsquad)
+    save_details.append(previousresults)
 
     with open(saved_game_filename, 'w') as filehandle:  
            filehandle.writelines('%s\n' % i for i in save_details)
@@ -78,17 +79,21 @@ nextyear_secondround=func_other_game_settings.secondrounddraftpicks
 thisyear_thirdround=func_other_game_settings.thirdrounddraftpicks
 nextyear_thirdround=func_other_game_settings.thirdrounddraftpicks
 
-defscore, atascore, players,developmentsquad,season = func_intro_gameintro.intro(incoming_season=season, game=game, defscore=defscore, atascore=atascore)
+defscore, atascore, players,developmentsquad,season,pseason = func_intro_gameintro.intro(incoming_season=season, game=game, defscore=defscore, atascore=atascore)
 
 
 #Game logic
+previousresults=[]
 
 while season != seasonstoplay:
 
     normal_season_wins=0
     playoff_wins=0
 
-    normal_season_wins=func_season.season(season=season, game=game,defscore=defscore, atascore=atascore, squad=players)
+    try:
+        normal_season_wins,previousresults=func_season.season(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,previousseasonresults=pseason)
+    except:
+        breakpoint()
     exp_gained,playoff_wins=func_play_off.playoff(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,gameswon=normal_season_wins)
     #print_previous_results()
 

@@ -113,7 +113,7 @@ def printplayers(input,vtt="n",draft="n",outputlimit=1000,justpostion="",players
 
                 if (playercount==0):
                     print ('{:<3}{:<4}{:<{}}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}'.format("N","P","Name",count_fullname_max_size,"A","GS","DS","AS","F","Ab","C","D","L","E","VTT","PA","Co","Wa","Sc"))
-                    print('{:<3}{:<5}{:<{}}{:<{}}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}'.format(field0,position,fname,count_letters_first_name,sname,count_letters_second_name,age,gskill,dskill,askill,fitness,ability,chara,determination,luck,experience,Valuetoteam,Potentialablity,Contract,wage,i[18]))
+                    print('{:<3}{:<5}{:<{}}{:<{}}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}'.format(field0,position,fname,count_letters_first_name,sname,count_letters_second_name,age,gskill,dskill,askill,fitness,ability,chara,determination,luck,experience,Valuetoteam,Potentialablity,Contract,wage,i[18]))
                     playercount+=1
                 else:
                     print('{:<3}{:<5}{:<{}}{:<{}}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}{:<4}'.format(field0,position,fname,count_letters_first_name,sname,count_letters_second_name,age,gskill,dskill,askill,fitness,ability,chara,determination,luck,experience,Valuetoteam,Potentialablity,Contract,wage,i[18]))

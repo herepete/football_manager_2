@@ -39,19 +39,20 @@ def l_game():
     filecontents2=filecontents[0]
     lplayers=[]
     ldevelopmentsquad=[]
-    lseason,lseasonpost,lplayers,ldevelopmentsquad=filecontents2
+    lseason,lseasonpost,lplayers,ldevelopmentsquad,lprev_season_results=filecontents2
 
     #strip out crap we don't want i.e \n and "
     lplayers=eval(lplayers)
     ldevelopmentsquad=eval(ldevelopmentsquad)
     lseason=eval(lseason)
     lseasonpost=eval(lseasonpost)
+    lprev_season_results=eval(lprev_season_results)
 
     global season
     season=lseason
 
 
-    return ("99","99",lplayers,ldevelopmentsquad)
+    return ("99","99",lplayers,ldevelopmentsquad,lprev_season_results)
 
 
 def intro(incoming_season, game, defscore, atascore):
@@ -74,6 +75,7 @@ def intro(incoming_season, game, defscore, atascore):
     '''
     global season
     season=incoming_season
+    p_season_results=""
 
     os.system('clear')
 
@@ -104,7 +106,7 @@ def intro(incoming_season, game, defscore, atascore):
         load_game_qm=input()
 
         if load_game_qm=="y":
-                defscore, atascore, players,development_squad = l_game()
+                defscore, atascore, players,development_squad,p_season_results = l_game()
                 masterdefscore, masteratascore = func_other_teamreport.report(players, formation, printoutput)
                 func_other_header.header(status="i", season=season, game=game,defscore=masterdefscore, atascore=masteratascore)
         else:
@@ -129,7 +131,7 @@ def intro(incoming_season, game, defscore, atascore):
     
     input("\nPress a button to continue")
 
-    return(masterdefscore, masteratascore, players,development_squad,season)
+    return(masterdefscore, masteratascore, players,development_squad,season,p_season_results)
 
 
 if __name__ == "__main__":

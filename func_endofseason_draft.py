@@ -588,6 +588,27 @@ def renewplayercontract(squad,developmentsquad):
                         playertochange=int(playertochange)
                         squad,developmentsquad=switch_main_squad_and_dev_squad(squad=squad,devsquad=developmentsquad,playertoremove=playertochange)
                         defscore, atascore = func_other_teamreport.report(squad, formation, printoutput="n")
+
+                        #add new player to dev squad
+                        tgk=0
+                        tdef=0
+                        tmid=0
+                        tata=0
+                        if playertochange <3:
+                            tgk=1
+                        elif playertochange <11:
+                            tdef=1
+                        elif playertochange <19:
+                            tmid=1
+                        else:
+                            tata=1
+
+                        #newplayer=developmentsquad[random_player_from_dev_squad]
+                        newplayer_for_dev_squad=func_other_create_players.createplayers(gk=tgk, defender=tdef, mid=tmid, ata=tata, qualityofplayer=60, maxageofplayer=21, minageofplayer=18, ef="abc",draftlist="n",developmentsquad="y")
+                        newplayer_for_dev_squad=newplayer_for_dev_squad[0]
+                        developmentsquad[dev_playertochange]=newplayer_for_dev_squad
+
+
                         input ("\nThe chosen player has been released...")
                         break
             if playeroption =="c":
@@ -751,6 +772,7 @@ def switch_main_squad_and_dev_squad(squad,devsquad,playertoremove):
     func_other_format_input.printplayers(templist_ps,draft="",outputlimit=100,justpostion="",playerswap="",extra_field_at_front="y")
     print ()
     while True:
+        global dev_playertochange
         dev_playertochange=(input("Which numbered player do you want to promote from the Development Squad {}? or press e to exit ".format(dev_numberofplayers)))
         if dev_playertochange=="e":
             breakhit=1
