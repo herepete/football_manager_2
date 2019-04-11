@@ -466,7 +466,29 @@ def sell_player(squad,players_to_sell,developmentsquad):
                     if (squad_pos==playertosell_position) and (squad_fname==playertosell_fname) and (squad_sname==playertosell_sname) and (squad_age==playertosell_age) and (squad_gkskill==playertosell_gkskill) and (squad_defskill==playertosell_defskill) and (squad_ataskill==playertosell_ataskill) and (squad_potential==playertosell_potential):
                         playertoremove=index
 
+
                 squad,developmentsquad=switch_main_squad_and_dev_squad(squad=squad,devsquad=developmentsquad,playertoremove=playertoremove)
+                #add new player to dev squad
+                ttgk=0
+                ttdef=0
+                ttmid=0
+                ttata=0
+                if playertoremove <3:
+                    ttgk=1
+                    print ("I have added a Gk for you")
+                elif playertoremove <11:
+                    ttdef=1
+                    print ("I have added a Def for you")
+                elif playertoremove <19:
+                    ttmid=1
+                    print ("I have added a Mid for you")
+                else:
+                    ttata=1
+                    print ("I have added a Ata for you")
+
+                newplayer_for_dev_squad1=func_other_create_players.createplayers(gk=ttgk, defender=ttdef, mid=ttmid, ata=ttata, qualityofplayer=60, maxageofplayer=21, minageofplayer=18, ef="abc",draftlist="n",developmentsquad="y")
+                newplayer_for_dev_squad1=newplayer_for_dev_squad1[0]
+                developmentsquad[dev_playertochange]=newplayer_for_dev_squad1
                 break
 
              # add sold players pick to our picks
@@ -1184,27 +1206,27 @@ def draft_choice_logic(pick_num=3):
         best_pot=0
         best_flawed=0
     elif pick_num < 33:
-        best_player=20
-        best_gk=40
-        best_def=60
-        best_mid=80
-        best_ata=100
-        best_pot=0
+        best_player=30
+        best_gk=47
+        best_def=64
+        best_mid=81
+        best_ata=97
+        best_pot=100
         best_flawed=0
     elif pick_num < 64:
-        best_player=0
-        best_gk=20
-        best_def=40
+        best_player=30
+        best_gk=40
+        best_def=50
         best_mid=60
-        best_ata=80
+        best_ata=70
         best_pot=100
         best_flawed=0
     else:
-        best_player=0
-        best_gk=12
-        best_def=24
-        best_mid=36
-        best_ata=60
+        best_player=10
+        best_gk=22
+        best_def=34
+        best_mid=46
+        best_ata=70
         best_pot=100
         best_flawed=0 # needs some work to include
        # i.e 3rd round
@@ -1564,7 +1586,13 @@ def pick_player_in_draft(picklogic,picknumber):
 
     if picklogic=="bp":
         createdraft.sort(key=lambda createdraft: createdraft[13], reverse=True)
-        whom_shall_we_remove=random.randint(0,2)
+        # trying to add a bit more value the lower down the draft you go
+        if picknumber < 33:
+            whom_shall_we_remove=random.randint(0,2)
+        elif picknumber < 65:
+            whom_shall_we_remove=random.randint(0,5)
+        else:
+            whom_shall_we_remove=random.randint(0,8)
         #print ("player ",createdraft[whom_shall_we_remove])
         temp_player=list(createdraft[whom_shall_we_remove])
         # hacky but getting it into a list of a list so print players can work
@@ -1682,8 +1710,13 @@ def draft_clearup (developmentsquad):
     #anyone over 24 in dev squad get releasted
     ########################## 22032019
     newplayer_for_dev_squad=""
-    for index,player in enumerate(developmentsquad): 
-        p_age=player[3]
+    for index,player in enumerate(developmentsquad):
+        try:
+            p_age=player[3]
+        except Exception as e:
+            print ("Oops")
+            print (e)
+            breakpoint
         p_position=player[0]
         if p_age >23:
             if p_position =="Gk":

@@ -30,8 +30,8 @@ def season(season, game, defscore, atascore, squad,previousseasonresults):
     #build opp score 
     opposition_skill=[]
     for i in range(0,16):
-        random_defscore=random.randint(65,85)
-        random_atascore=random.randint(65,85)
+        random_defscore=random.randint(70,85)
+        random_atascore=random.randint(68,85)
         random_opps=[random_defscore,random_atascore]
         opposition_skill.append(random_opps)
 
@@ -115,14 +115,17 @@ def season(season, game, defscore, atascore, squad,previousseasonresults):
 
         print ()
         print ("Previous season results")
-        print ("\nS W D  A")
+        print ("\nSeason, Win, Def_Score,  Ata_Score")
+        print ("==================================")
+
         for i in previous_results:
             #breakpoint()
             temp_season=i[0]
             temp_wins=i[1]
             temp_def=i[2]
             temp_ata=i[3]
-            print (temp_season,temp_wins,temp_def,temp_ata)
+            print ('{:<8}{:<5}{:<12}{:<6}'.format(temp_season,temp_wins,temp_def,temp_ata))
+            #print (temp_season,temp_wins,temp_def,temp_ata)
 
             
         
