@@ -475,16 +475,12 @@ def sell_player(squad,players_to_sell,developmentsquad):
                 ttata=0
                 if playertoremove <3:
                     ttgk=1
-                    print ("I have added a Gk for you")
                 elif playertoremove <11:
                     ttdef=1
-                    print ("I have added a Def for you")
                 elif playertoremove <19:
                     ttmid=1
-                    print ("I have added a Mid for you")
                 else:
                     ttata=1
-                    print ("I have added a Ata for you")
 
                 newplayer_for_dev_squad1=func_other_create_players.createplayers(gk=ttgk, defender=ttdef, mid=ttmid, ata=ttata, qualityofplayer=60, maxageofplayer=21, minageofplayer=18, ef="abc",draftlist="n",developmentsquad="y")
                 newplayer_for_dev_squad1=newplayer_for_dev_squad1[0]
@@ -2351,21 +2347,23 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
     bb1=""
     bb2=""
     bb1,bb2,bad_ness=func_other_menu.finance_report(squad,returnv="y")
-    if bad_ness < -15:
+    if bad_ness < -14:
+        print ("Because you have massivley breached salary cap rules you have had all your draft picks removed")
+        input()
+        all_round_pn.clear()
+    elif bad_ness < -10:
+        breakpoint()
         #delete first round pick
         print ("Because you have massivley breached salary cap rules you have had your first round pick removed")
         input()
-        input()
         del all_round_pn[0]
-    elif bad_ness < -10:
+    elif bad_ness < -5:
         print ("Because you have breached salary cap rules you have had your second round pick removed")
-        input()
         input()
         #delete second round pick
         del all_round_pn[1]
-    elif bad_ness < -5:
+    elif bad_ness < -1:
         print ("Because you have breached salary cap rules you have had your third round pick removed")
-        input()
         input()
         #delete third round pick
         all_round_pn.pop()
