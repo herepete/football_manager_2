@@ -43,7 +43,7 @@ def print_previous_results():
     previous_results.append(temp_results)
 
     print ()
-    print ("Previous season results")
+    print ("Previous season results 1")
     print ("\nS W D  A")
     for i in previous_results:
         temp_season=i[0]
@@ -90,21 +90,48 @@ while season != seasonstoplay:
     normal_season_wins=0
     playoff_wins=0
 
+    # normal season
     try:
-        normal_season_wins,previousresults=func_season.season(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,previousseasonresults=pseason)
-    except:
+        normal_season_wins,previousresults=func_season.season(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,tpreviousseasonresults=pseason)
+    except Exception as e:
+        print (e)
         breakpoint()
+    # play off 
     exp_gained,playoff_wins=func_play_off.playoff(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,gameswon=normal_season_wins)
     #print_previous_results()
 
-
+    # end of season training
     squad,devsquad=func_endofseason_training.training(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,devsquad=developmentsquad,experience_gained=exp_gained)
+    # end of season draft
     func_endofseason_draft.draft(game=game,idefscore=defscore, iatascore=atascore, squad=players,thisyear_firstround=thisyear_firstround,nextyear_firstround=nextyear_firstround,thisyear_secondround=thisyear_secondround,nextyear_secondround=nextyear_secondround,thisyear_thirdround=thisyear_thirdround,nextyear_thirdround=nextyear_thirdround,developmentsquad=developmentsquad,normal_season_wins=normal_season_wins,playoff_wins=playoff_wins,season_in=season)
+    #add end of seasons playoff result to 
+    len_previousresults=len(previousresults)-1
+    if playoff_wins==0:
+        poresults="Did not reach Play-offs"
+    elif playoff_wins==1:
+        poresults="Lost in Wildcard Weekend"
+    elif playoff_wins==2:
+        poresults="Lose in Divsional Game"
+    elif playoff_wins==3:
+        poresults="Lose in Conference Final"
+    elif playoff_wins==4:
+        poresults="Lose Superbowl"
+    elif playoff_wins==5:
+        poresults="Won Superbowl"
+    else:
+        breakpoint()
+    try:
+        previousresults[len_previousresults].append(poresults)
+    except Exception as e1:
+        print (e1)
+        breakpoint()
+
+    #updat team scores
     defscore, atascore=func_other_teamreport.report(oursquad=squad, formation=1442, printoutput="n")
 
     #clean up
     season=season+1
-    #rotate draft picks
+    #rotate draft picks, not currently used
     thisyear_firstround=nextyear_firstround
     nextyear_firstround=func_other_game_settings.firstrounddraftpicks
     thisyear_secondround=nextyear_secondround

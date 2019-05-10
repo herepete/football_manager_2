@@ -8,7 +8,7 @@ global previous_results
 previous_results=[]
 
 
-def season(season, game, defscore, atascore, squad,previousseasonresults):
+def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
     '''
     This is where the standard season starts
     input = season, game, defscore, atascore, squad)
@@ -27,7 +27,8 @@ def season(season, game, defscore, atascore, squad,previousseasonresults):
 
     ourwins=0
    
-    #build opp score 
+    #build opp score
+    global previousseasonresults 
     opposition_skill=[]
     for i in range(0,16):
         random_defscore=random.randint(70,85)
@@ -99,24 +100,28 @@ def season(season, game, defscore, atascore, squad,previousseasonresults):
 
         print ("Games Won ",ourwins)
 
+        #insert option here to call function
+        #season_results(season=season,po_result="",win=ourwins,Def_score=defscore,Ata_score=atascore)
+        #"""
         global previous_results
 
-    #check if we have previous season results (i.e from a loaded game and if so use them)
-        if not previousseasonresults:
+        #check if we have previous season results (i.e from a loaded game and if so use them)
+        if not tpreviousseasonresults:
             #i.e empty
             #print("no results")
             pass
         else:
-            previous_results=previousseasonresults
+            previous_results=tpreviousseasonresults
 
 
         temp_results=[season,ourwins, defscore, atascore]
+
         previous_results.append(temp_results)
 
         print ()
         print ("Previous season results")
-        print ("\nSeason, Win, Def_Score,  Ata_Score")
-        print ("==================================")
+        print ("\nSeason, Win, Def_Score,  Ata_Score, PlayOffResult")
+        print ("====================================================")
 
         for i in previous_results:
             #breakpoint()
@@ -124,19 +129,66 @@ def season(season, game, defscore, atascore, squad,previousseasonresults):
             temp_wins=i[1]
             temp_def=i[2]
             temp_ata=i[3]
-            print ('{:<8}{:<5}{:<12}{:<6}'.format(temp_season,temp_wins,temp_def,temp_ata))
+            try:
+                temp_prev_play_results=i[4]
+            except:
+                temp_prev_play_results=""
+            print ('{:<8}{:<5}{:<12}{:<11}{:<12}'.format(temp_season,temp_wins,temp_def,temp_ata,temp_prev_play_results))
             #print (temp_season,temp_wins,temp_def,temp_ata)
-
-            
+        #"""
         
-
         userinput= input("Press enter to continue or m for menu\n")
+        #season_results2(season=season,po_result="",win=ourwins,Def_score=defscore,Ata_score=atascore,presults=previous_results)
         if userinput=="m":
             func_other_menu.menu(oursquad=squad, formation=1442, printoutput="y")
         else:
             break
     #breakpoint()
+    #season_results2(season=season,po_result="",win=ourwins,Def_score=defscore,Ata_score=atascore,presults=previous_results)
+    #global previous_results
     return (ourwins,previous_results)
+
+#def season_results2(season,win,po_result,Def_score,Ata_score,presults):
+#
+#    lprevious_results=presults
+#    temp_results=[season,win, Def_score, Ata_score,presults]
+#    lprevious_results.append(temp_results)
+#
+#    breakpoint()
+
+def season_results(season,win,Def_score,Ata_score):
+
+    global previous_results
+    global previousseasonresults
+    breakpoint()
+
+    #check if we have previous season results (i.e from a loaded game and if so use them)
+    if not previousseasonresults:
+        #i.e empty
+        #print("no results")
+        pass
+    else:
+        previous_results=previousseasonresults
+
+
+    temp_results=[season,win, Def_score, Ata_score]
+    previous_results.append(temp_results)
+
+    print ()
+    print ("Previous season results")
+    print ("\nSeason, Win, Def_Score,  Ata_Score")
+    print ("==================================")
+
+    for i in previous_results:
+        temp_season=i[0]
+        temp_wins=i[1]
+        temp_def=i[2]
+        temp_ata=i[3]
+        print ('{:<8}{:<5}{:<12}{:<6}'.format(temp_season,temp_wins,temp_def,temp_ata))
+
+
+
+    
         
 
 if __name__=="__main__":

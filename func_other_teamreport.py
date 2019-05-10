@@ -2,6 +2,7 @@
 # this is used in working out who won a match
 import random
 import os
+import func_other_game_settings
 
 # sync up the spacing of chars
 
@@ -392,11 +393,19 @@ def vtt(playerin):
 
     return(players_out,tempvtt)
 
-def special_player_check(player_exp,player_ablity,player_char,org_sc=""):
+def special_player_check(player_exp,player_ablity,player_char,playerage,org_sc=""):
+    
+    playerage=int(playerage)
 
-    if (player_exp+player_ablity+player_char)> 48:
+    #lets stop young players getting super powers, this also allows us to sign players to D or undrafted Contracts
+
+    agfs=func_other_game_settings.age_for_super_powers
+    ssfgt=func_other_game_settings.skill_set_for_Good_trainer
+    sstst=func_other_game_settings.skill_set_for_Superb_trainer
+
+    if (player_exp+player_ablity+player_char)> int(sstst) and playerage>int(agfs):
         return ("ST")
-    elif (player_exp+player_ablity+player_char)> 41:
+    elif (player_exp+player_ablity+player_char)> int(ssfgt) and playerage>int(agfs):
         return("GT")
     elif org_sc=="D":
         return ("D")
@@ -508,7 +517,7 @@ def sortourteam(oursquad, formation, printoutput):
         for j in  i: 
             #breakpoint()
             position = j
-            special_result=special_player_check(player_exp,player_ablity,player_char,org_sc=i[17])
+            special_result=special_player_check(player_exp,player_ablity,player_char,playerage=i[3],org_sc=i[17])
             i[17]=special_result
 
 

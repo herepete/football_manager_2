@@ -61,13 +61,19 @@ def playernames():
 
 
     first_names = ('Wayne', 'Alan', 'David', 'Stuart', 'Luke ', 'Choper', 'Alfa  ', 'Joe', 'Mike', 'Steven', 'Tim', 'Jim', 'Dana', 'Jake', 'Ben', 'Davo', 'Nick', 'Rambo', 'Seb', 'Danny', 'Josh', 'Evan', 'Caleb', 'Sven', 'Tank', 'Austin', 'Seth', 'Matt', 'Jeremy', 'Darran', 'Myles', 'Lenny', 'Chris', 'Drew', 'Donald', 'Jamar', 'Baker', 'Payton', 'Antonio', 'Dylan', 'Charlie', 'Samuel', 'Gareth', 'Liam', 'Lucas', 'Jose', 'Mateo', 'Noel', 'Adam', 'Jonas', 'Elias', 'Marko', 'Johnny', 'Harry', 'Bobby', 'Logan', 'Phil', 'Vincent', 'Randy', 'Russel', 'Gabriel', 'Louis', 'Eugene', 'Ralph', 'Jordan', 'Noah', 'Bruce', 'Ethan', 'Keith', 'Jan', 'Cameron', 'Ahmed',
-                   'Hamada', 'Jens', 'Junior', 'Omar', 'Manish', 'Jude', 'Thiago', 'Alexis', 'Elijah', 'Javier', 'Ari', 'Rawiri', 'Lukas', 'Riccardo', 'Hans', 'Leon', 'Vicktor', 'Tommaso', 'Goran', 'Zoran', 'Flyn', 'Emil', 'Davit', 'Minik', 'Carlos', 'Damion', 'Denzel', 'Mychal', 'Genard', 'Brogan', 'Derron', 'Britton', 'Ross', 'Derrick', 'Zay', 'Tom', 'Merlin', 'Milan', 'Melin', 'Ace', 'Martin', 'Martyn', 'Marvin', 'Harper', 'Jace', 'Corvert', 'Glenn', 'Dai', 'Travis', 'Tomas', 'Ayat', 'Duncan', 'Seren', 'Hassan', 'Dillan', 'Ada', 'Kiran', 'Franky', 'Mitchel', 'Shay', 'Ray', 'Jenson', 'Miguel', 'Paisley', 'Antoni', 'Hugo', 'Arlo', 'Dexter', 'Callam', 'DJ')
+                   'Hamada', 'Jens', 'Junior', 'Omar', 'Manish', 'Jude', 'Thiago', 'Alexis', 'Elijah', 'Javier', 'Ari', 'Rawiri', 'Lukas', 'Riccardo', 'Hans', 'Leon', 'Vicktor', 'Tommaso', 'Goran', 'Zoran', 'Flyn', 'Emil', 'Davit', 'Minik', 'Carlos', 'Damion', 'Denzel', 'Mychal', 'Genard', 'Brogan', 'Derron', 'Britton', 'Ross', 'Derrick', 'Zay', 'Tom', 'Merlin', 'Milan', 'Melin', 'Ace', 'Martin', 'Martyn', 'Marvin', 'Harper', 'Jace', 'Corvert', 'Glenn', 'Dai', 'Travis', 'Tomas', 'Ayat', 'Duncan', 'Seren', 'Hassan', 'Dillan', 'Ada', 'Kiran', 'Franky', 'Mitchel', 'Shay', 'Ray', 'Jenson', 'Miguel', 'Paisley', 'Antoni', 'Hugo', 'Arlo', 'Dexter', 'Callam', 'DJ','Glen', 'Taj', 'Mungo', 'Ash', 'Ian', 'Iain', 'Iakov', 'Ike', 'Illya', 'Idriys', 'Issac', 'Ivan', 'Will', 'William', 'Wyatt', 'Wade', 'Walter', 'Wes', 'Wesley', 'Winston', 'Wiley', 'Owen', 'Oliver', 'Oscar', 'Otis', 'Oz', 'Otto', 'Olly', 'Oswin', 'Paul', 'Pat', 'Patrick', 'Phillip', 'Phoenix', 'Pierre', 'Perry', 'Pierce', 'Paco', 'Paris','Val', 'Valerie', 'Valen', 'Vadim', 'Quain', 'Quade ', 'Nacho', 'Naal', 'Nadir', 'Nario', 'Nasim', 'Nat', 'Nathaniel', 'Frank', 'Francis', 'Finn', 'Felix', 'Fabio','Freddy')
 
+    global fn
+    #making global so it can be called during testing
+    fn=first_names
+    #breakpoint() 
     firstname = (random.choice(first_names))
 
-    last_names = ('Rooney', 'Smith', 'Beckam', 'Broad ', 'Jones', 'Ford', 'Stansfield', 'Abacus', 'Plato', 'Shaw', 'Robert', 'Sping ', 'Taylor', 'Wilson', 'Bailey', 'Hoss', 'Gavate', 'Green ', 'Oneil ', 'Thomon', 'Avery', 'Chubb', 'Mayfield', 'Ward', 'Thomas', 'Scott', 'Salako', 'Reiter', 'Nassib', 'Njoku', 'Ratley', 'Schobert', 'Kindred', 'Johnson', 'Dayes', 'Ekuale', 'Fells', 'Garrett', 'Rogers', 'Price', 'Bell', 'Gibson', 'Mills', 'Booth', 'Dixon', 'Lane', 'Harper', 'Walker', 'Watson', 'Jackson', 'Davis', 'Cox', 'Fox', 'Ali', 'Hart', 'Whiteman', 'Frazer', 'Clarke', 'Clark', 'Webb', 'Kelley', 'James', 'Barnes', 'Gill', 'Hudson', 'Cook', 'Allen', 'Poole', 'Lawson', 'Stewart', 'Read', 'Reid', 'Powell', 'Barker', 'Dawson', 'Cann', 'Brooks','Anderson','Ahmed','Archer','Asher','Adey','Ainsworth','Arrowsmith','Amor','Aylot','Atterbury','Dunn','Daniel','David','Dallas','Diamond','Ducon','Drain','Duke','Denney','Donaldson','Drew','Durrant','Deans','Dreyer', 'Eyett','Emms','Edler','Earl','Ealy','Easen','Emerson','English','Edwards','Elkin','Edge','Ellard','Ireland','Irvine','Isaacs','Imran','Ingermann','Neale','Nield','Nash','North','Nedd','Neish','Norcross','Newbury','Nickel','Nicol','Owen','Ould','Oddie', 'Ellis', 'Khan', 'Carter', 'Patel', 'Adams', 'Potter', 'Bishop', 'Field', 'Payne', 'Bolton', 'Hardy', 'Parry', 'Marsh', 'Burns', 'French', 'Park', 'Forrest', 'Banks', 'Lynch', 'Sharp', 'Bates', 'Riley', 'Atkins', 'Love', 'Hawkins', 'Duncan', 'Byrne', 'Pritchard', 'Simmons', 'Perry', 'Fabino', 'Orchard', 'Vogel', 'Rice', 'Berry', 'Cajuste', 'Tretter', 'Robinson', 'Bello', 'Currie', 'Grace', 'Gay', 'Stanton', 'Janis', 'Sankoh', 'Caldwell', 'Hubbard', 'Graham', 'Wagner', 'Stanley', 'Cunningham', 'Kennedy', 'Lee', 'Holt', 'Lowe', 'Ozel', 'Swenney', 'Weaver', 'Whyte', 'Black', 'Shelton', 'Olsen', 'Ortiz', 'Howarth', 'Pasons', 'Major', 'Corben', 'Bird', 'Santos', 'Whitehouse', 'Mccoy', 'Meyer', 'Laing', 'Blair', 'Bauer', 'Baver', 'Garze', 'Last')
+    last_names = ('Rooney', 'Smith', 'Beckam', 'Broad ', 'Jones', 'Ford', 'Stansfield', 'Abacus', 'Plato', 'Shaw', 'Robert', 'Sping ', 'Taylor', 'Wilson', 'Bailey', 'Hoss', 'Gavate', 'Green ', 'Oneil ', 'Thomon', 'Avery', 'Chubb', 'Mayfield', 'Ward', 'Thomas', 'Scott', 'Salako', 'Reiter', 'Nassib', 'Njoku', 'Ratley', 'Schobert', 'Kindred', 'Johnson', 'Dayes', 'Ekuale', 'Fells', 'Garrett', 'Rogers', 'Price', 'Bell', 'Gibson', 'Mills', 'Booth', 'Dixon', 'Lane', 'Harper', 'Walker', 'Watson', 'Jackson', 'Davis', 'Cox', 'Fox', 'Ali', 'Hart', 'Whiteman', 'Frazer', 'Clarke', 'Clark', 'Webb', 'Kelley', 'James', 'Barnes', 'Gill', 'Hudson', 'Cook', 'Allen', 'Poole', 'Lawson', 'Stewart', 'Read', 'Reid', 'Powell', 'Barker', 'Dawson', 'Cann', 'Brooks','Anderson','Ahmed','Archer','Asher','Adey','Ainsworth','Arrowsmith','Amor','Aylot','Atterbury','Dunn','Daniel','David','Dallas','Diamond','Ducon','Drain','Duke','Denney','Donaldson','Drew','Durrant','Deans','Dreyer', 'Eyett','Emms','Edler','Earl','Ealy','Easen','Emerson','English','Edwards','Elkin','Edge','Ellard','Ireland','Irvine','Isaacs','Imran','Ingermann','Neale','Nield','Nash','North','Nedd','Neish','Norcross','Newbury','Nickel','Nicol','Owen','Ould','Oddie', 'Ellis', 'Khan', 'Carter', 'Patel', 'Adams', 'Potter', 'Bishop', 'Field', 'Payne', 'Bolton', 'Hardy', 'Parry', 'Marsh', 'Burns', 'French', 'Park', 'Forrest', 'Banks', 'Lynch', 'Sharp', 'Bates', 'Riley', 'Atkins', 'Love', 'Hawkins', 'Duncan', 'Byrne', 'Pritchard', 'Simmons', 'Perry', 'Fabino', 'Orchard', 'Vogel', 'Rice', 'Berry', 'Cajuste', 'Tretter', 'Robinson', 'Bello', 'Currie', 'Grace', 'Gay', 'Stanton', 'Janis', 'Sankoh', 'Caldwell', 'Hubbard', 'Graham', 'Wagner', 'Stanley', 'Cunningham', 'Kennedy', 'Lee', 'Holt', 'Lowe', 'Ozel', 'Swenney', 'Weaver', 'Whyte', 'Black', 'Shelton', 'Olsen', 'Ortiz', 'Howarth', 'Pasons', 'Major', 'Corben', 'Bird', 'Santos', 'Whitehouse', 'Mccoy', 'Meyer', 'Laing', 'Blair', 'Bauer', 'Baver', 'Garze','Quinn', 'Quirk', 'Quintion', 'Quigley', 'Quirke', 'Yang', 'Yallop', 'Yard', 'Yeoman', 'Yeung', 'Young', 'York', 'Yeomans', 'Zaoui', 'Tagg', 'Tait', 'Tillett', 'Tomlin', 'Tollis', 'Tetlow', 'Tallon', 'Tapp', 'Tolmay', 'Tarr','Ibbs', 'Iddon', 'Ilet', 'Ingleby', 'Inker', 'Inglefield', 'Isbitt', 'Isherwoord', 'Irwin', 'Jacobs', 'Jewitt', 'John', 'Johansen', 'Jobson', 'Johnston', 'Jarman', 'Juey', 'Jowitt', 'Kalton', 'Kaul', 'Kirk', 'Kirkham', 'Keyte', 'Keys', 'Key', 'Kett', 'Keal', 'Keane', 'Kiddell' ,'Last')
 
     lastname = (random.choice(last_names))
+    global ln
+    ln = last_names
 
     return(firstname, lastname)
 
@@ -299,7 +305,7 @@ def buildplayer(position, numberofplayer, qualityofplayer, maxageofplayer, minag
 
 #special skill
         Special_skill=""
-        special_result=func_other_teamreport.special_player_check(experience,ability,char)
+        special_result=func_other_teamreport.special_player_check(experience,ability,char,age)
         Special_skill=special_result
 
 # build
@@ -382,9 +388,66 @@ if __name__ == "__main__":
     #func_other_format_input.printplayers(freeagents,draft="y",outputlimit=100)
     func_other_format_input.printplayers(freeagents,vtt="n",draft="n",outputlimit=25,justpostion="",playerswap="n",extra_field_at_front="n")
 
-    #newplayer=createplayers(gk=1, defender=0, mid=0, ata=0, qualityofplayer=50, maxageofplayer=21, minageofplayer=18, ef="abc",draftlist="n",developmentsquad="y")
+    #newplayer=createplayers(gk=50000, defender=0, mid=0, ata=0, qualityofplayer=50, maxageofplayer=21, minageofplayer=18, ef="abc",draftlist="n",developmentsquad="y")
     #print (newplayer)
-    #func_other_format_input.printplayers(newplayer,draft="y",outputlimit=100)
+    #func_other_format_input.printplayers(newplayer,draft="y",outputlimit=50000)
+
+    #to batch test
+    #[root@g4 football_manager_2]# ./func_other_create_players.py  > /tmp/123 ; cat /tmp/123 | awk '{print $2, $3}' | sort | uniq -c | sort -n
+
+    #print(fn.sort)
+
+    print ("Summary")
+    print ("=======")
+
+    fn_sorted=sorted(fn)
+    fn_count=len(fn)
+    print ("there are %s first names" %(fn_count))
+    
+    ln_sorted=sorted(ln)
+    ln_count=len(ln)
+    print ("there are %s last names" %(ln_count))
+
+    import collections
+    
+    def count(listOfTuple,tvalue=2):
+        flag=False
+        val = collections.Counter(listOfTuple) 
+        uniqueList = list(set(listOfTuple)) 
+
+        for i in uniqueList: 
+            if val[i]>= tvalue: 
+                flag = True
+                print(i, "-", val[i]) 
+              
+        if flag == False: 
+            print("Duplicate doesn't exist")
+    print ("checking for Duplicate First name...")
+    count(fn_sorted)
+    print ("checking for Duplicate Last name...")
+    count(ln_sorted)
+
+    user_input=input("\n\nPress...\na to check first names\nb to batch test 10,000 players\nc to check last lastnames")
+    if user_input=="a":
+        for i in fn_sorted:
+            print (i)
+    if user_input=="b":
+        print ("")
+        listplayernames=[]
+        for i in range (10000):
+            a,b=playernames()
+            fullname=a+" "+b
+            listplayernames.append(fullname)
+       
+        newp_tupel=tuple(listplayernames)
+        print ("checking for Duplicate ...(more then 4)")
+        count(newp_tupel,tvalue=4)
+    if user_input=="c":
+        for i in ln_sorted:
+            print (i)
+
+    
+
 
 
     '''

@@ -79,6 +79,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
 
     if ngameswon < 9:
         input("You have not won enough games to enter the playoff's this year")
+        #playoffwins=-1
         return (normal_exp,playoffwins)
 
     if ngameswon < 11:
