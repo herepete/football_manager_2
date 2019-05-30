@@ -97,7 +97,14 @@ while season != seasonstoplay:
         print (e)
         breakpoint()
     # play off 
-    exp_gained,playoff_wins=func_play_off.playoff(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,gameswon=normal_season_wins)
+    #stage_po=0 
+    #stage_po=1
+    #stage_po=2
+    #stage_po=3
+    #stage_po=4
+    #stage_po=5
+
+    exp_gained,playoff_wins,stage_po=func_play_off.playoff(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,gameswon=normal_season_wins)
     #print_previous_results()
 
     # end of season training
@@ -106,17 +113,17 @@ while season != seasonstoplay:
     func_endofseason_draft.draft(game=game,idefscore=defscore, iatascore=atascore, squad=players,thisyear_firstround=thisyear_firstround,nextyear_firstround=nextyear_firstround,thisyear_secondround=thisyear_secondround,nextyear_secondround=nextyear_secondround,thisyear_thirdround=thisyear_thirdround,nextyear_thirdround=nextyear_thirdround,developmentsquad=developmentsquad,normal_season_wins=normal_season_wins,playoff_wins=playoff_wins,season_in=season)
     #add end of seasons playoff result to 
     len_previousresults=len(previousresults)-1
-    if playoff_wins==0:
+    if stage_po==0:
         poresults="Did not reach Play-offs"
-    elif playoff_wins==1:
+    elif stage_po==1:
         poresults="Lost in Wildcard Weekend"
-    elif playoff_wins==2:
-        poresults="Lose in Divsional Game"
-    elif playoff_wins==3:
-        poresults="Lose in Conference Final"
-    elif playoff_wins==4:
-        poresults="Lose Superbowl"
-    elif playoff_wins==5:
+    elif stage_po==2:
+        poresults="Lost in Divsional Game"
+    elif stage_po==3:
+        poresults="Lost in Conference Final"
+    elif stage_po==4:
+        poresults="Lost Superbowl"
+    elif stage_po==5:
         poresults="Won Superbowl"
     else:
         breakpoint()

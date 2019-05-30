@@ -9,6 +9,7 @@ import func_other_teamreport
 import func_other_errorchecking
 import random
 import func_other_game_settings
+import pdb
 
 #from itertools import permutations
 from itertools import combinations 
@@ -39,6 +40,14 @@ formation=func_other_game_settings.defaultformation
 
 global player_history
 player_history=[]
+
+# desperate pick section. made global to stop refreshing of offers when page is reloaded
+global desp_picks_offered,gdpick1,gdpick2
+desp_picks_offered=0
+gdpick1=0
+gdpick2=0
+
+
 
 
 
@@ -433,9 +442,11 @@ def sell_player(squad,players_to_sell,developmentsquad):
             playertochange=(input("Which numbered player do you want to sell {}? or press e to exit ".format(numberofplayers)))
             if playertochange=="e":
                 players_pic_num=""
+                break
                 return(squad,developmentsquad,players_pic_num)
+            else:
                 #error check userinput
-            valid_answer=func_other_errorchecking.checkinput(number="y",char="n",min=0,max=0,userinput=playertochange,listinput=numberofplayers)
+                valid_answer=func_other_errorchecking.checkinput(number="y",char="n",min=0,max=0,userinput=playertochange,listinput=numberofplayers)
             if valid_answer=="False":
                 #bad answer
                 print ("That is not a valid input please re-enter a correct value")
@@ -865,6 +876,7 @@ def switch_main_squad_and_dev_squad(squad,devsquad,playertoremove):
 
 def rebuild_newpoints(allvalues,valueofplayer):
         #rebuild is done to stop the same pick being offered twice (to give the user more choice)
+        #it also strips out any picks higher than our pick
     newpoints=[]
 
     for key,value in allvalues.items():
@@ -873,6 +885,8 @@ def rebuild_newpoints(allvalues,valueofplayer):
             newpoints.append(value)
 
     return(newpoints)
+
+#def offer_picks
 
 
 def move_up_down_draft (picks):
@@ -938,33 +952,61 @@ def move_up_down_draft (picks):
         if int(picks[0])>32:
             print ("No first round picks are avaiable to trade down for")
         else:
+            # simple explanation - We don't want trade offers for picks we already possess so we remove our picks as eligable items from allvalues lookup, we also remove any picks higher than our first round pick.
+            # example we have pick 4,34,78 . from our lookup 1,2,3,4 get stripped as they are not permitted numbers
+            # explanation - get value of our first pick (at index 0 of picks) and delete it
             for index,i in enumerate(picks):
                 tempstr=str(i)
                 # firstitem
                 if index==0:
                     valueofplayer= int(allvalues.get(tempstr))
+                if index==1:
+                    #used to help caculate if we can offer a pick for our second first round pick
+                    valueof2player=int(allvalues.get(tempstr))
                 del allvalues[tempstr]
 
             newpoints=[]
             newpoints=rebuild_newpoints(allvalues,valueofplayer)
             offers={}
+            #will look like offers={'23': '57', '48': '28'}
+            picks_for_offers=[]
+            #will look like picks_for_offers=[1,32]
+            #output will look like...
+            # for Your 1 you are offered pick 23 and 57
+            # for Your 32 you are offered pick 48 and 28
+
+
 
             count_p=0
             while True:
-                # first random number
+                # this will create 3 offers
+                # each offer to you is made up of 2 picks(parts)
+                # 1 pick(part) a random number lower than your pick
+                # 2 pick(part)a numerical is caculated by value of your pick - 1st part of the offer
+                # each offer & your current pick & anything higher than your pick will get removed from the lookup
+                # so if you win the SB and have pick 32 the first 32 picks are removed from the lookup followed by 6(3*2)offers & any other picks you already have
+ 
+                # first part of offer 
+                # explanation pick a random number from newpoints (depending on picks number the lookup will show all values less than your highest pick)
+
                 firstofferrn=random.choice(newpoints)
+                #explanation firstofferrn (example 600 i.e 32)is turned into a positional pick number
                 for key,value in allvalues.items():
                     if value==firstofferrn:
                         firstoffer_text=key
+                #explanation don't want that random pick to be offered again so its removed from the lookup 
                 del allvalues[firstoffer_text]
                 newpoints=rebuild_newpoints(allvalues,valueofplayer)
-                ###########need to delete key and value of my first random
 
-                #value left
+                #explanation so we know have 1 pick in exchange for ours to get the second pick we work our the differnce between the pick we have and the pick we have already been offered
+                # example we have pick number 1 in the draft, random selected first offer is pick 4 , the second offer is worked out as the points left where pick 1 (3000 points)  -pick 4 (1800points)
+                # = 1200 points left to find. Going back to the lookup 1200 points = Pick 12 so the offer sheet will look something like
+                # For pick number 1 in the draft you are offered pick 4 & pick 12
+
                 value_left=int(valueofplayer)-int(firstofferrn)
                 seondoffer=0
 
-                #second pick
+                #second part of offer
                 for i in newpoints:
                     if int(value_left) > int(i):
                         seondoffer=i
@@ -990,29 +1032,101 @@ def move_up_down_draft (picks):
                 del allvalues[seondoffer_text]
                 newpoints=rebuild_newpoints(allvalues,valueofplayer)
 
-                #print ("For offer %s we offer you %s %s " %(all_of_our_picks,firstoffer_text,seondoffer_text))
+                #add offer to offical list
                 offers[firstoffer_text]=seondoffer_text
                 count_p=count_p+1
+                picks_for_offers.append(first_round_pick)
+                #breakpoint()
+                # the 3 here means we only want 3 different offers(the count starts at 0) for our picks (each offer is made up of 2 picks)
                 if count_p==3:
                     break
 
+
+            #let check if we have a second first round pick and see if we can create an offer of that (it might be the lookup is to small or the maths is not possible)
+            picks.sort()
+            countfrp=0
+            second_first_round_hit=0
+            for i in picks:
+                tempi=int(i)
+                if i < 33:
+                    countfrp+=1
+                if countfrp < 2:
+                    pass
+                if i > 32:
+                    pass
+                    #less than 2 first round picks
+                    #pick number is greater than 32
+                else:
+                    #breakpoint()
+                    # more than 1 first round pick
+                    # follow logic from above section
+                    count_ps=0
+                    second_first_round_hit=1
+                    while True:
+
+                        newpoints=rebuild_newpoints(allvalues,valueof2player)
+                        # first part of offer
+                        firstofferrn_second=random.choice(newpoints)
+                        for key,value in allvalues.items():
+                            if value==firstofferrn_second:
+                                firstoffer_text_second=key
+                        del allvalues[firstoffer_text_second]
+                        newpoints=rebuild_newpoints(allvalues,valueof2player)
+
+                        value_left=int(valueofplayer)-int(firstofferrn_second)
+                        seondoffer=0
+                        #second part of offer
+
+                        for i in newpoints:
+                            if int(value_left) > int(i):
+                                seondoffer=i
+                                break
+
+                            seondoffer_text=""
+                        for key2,value2 in allvalues.items():
+                            if value2==seondoffer:
+                                seondoffer_text=key2
+                        if seondoffer_text=="":
+                            if value_left < 200:
+                                seondoffer_text=sorted(allvalues.keys())[-1]
+                        count_ps+=1
+                        if count_ps > 0:
+                            break
+                    offers[firstoffer_text_second]= seondoffer_text
+                    picks_for_offers.append(tempi)
+                    #breakpoint()
+
             offer_counter=0
-            print ("For your top pick (%s), here are 3 offers..." %(first_round_pick))
+            if second_first_round_hit==0:
+                print ("Here are some offers for your picks...")
+                # used for error checking
+                maxoffers=2
+            else:
+                second_first_round_pick=picks[1]
+                print ("Here are some offers for your picks...")
+                maxoffers=3
+
             print ()
-            print ("{:<8}{:<16}{:<16}".format("Offer","Pick Number 1","Pick Number 2"))
-            for key,value in offers.items():
-                    print ("{:<8}{:<16}{:<16}".format(offer_counter,key,value))
+            print ("{:<8}{:<16}{:<16}{:<16}".format("Offer","Pick Number 1","Pick Number 2","For your Pick"))
+            for index,(key,value) in enumerate(offers.items()):
+                    tempoffer=picks_for_offers[index]
+                    print ("{:<8}{:<16}{:<16}{:<16}".format(offer_counter,key,value,tempoffer))
                     if offer_counter==0:
                         offer_0=[key,value]
                     elif offer_counter==1:
                         offer_1=[key,value]
                     elif offer_counter==2:
                         offer_2=[key,value]
+                    elif offer_counter==3:
+                        offer_3=[key,value]
+                    elif offer_counter==4:
+                        offer_4=[key,value]
+                    elif offer_counter==5:
+                        offer_5=[key,value]
+                    elif offer_counter==6:
+                        offer_6=[key,value]
 
-                #print ("\t",offer_counter,key,value)
                     offer_counter=offer_counter+1
-        #user_input=input("Enter a number to accept that offer")
-        #user_input=input("\nEnter: \n(e)exit\n(m)Move up Draft\n(d)Move Down Draft ")
 
         breakhit_trace=0
         while True:
@@ -1034,16 +1148,21 @@ def move_up_down_draft (picks):
                 if int(picks[0])> 32:
                     print ("Sorry you can only trade down first round picks & you don't have any :(")
                     input()
-                    break
+                    break 
+
                 user_replace=input("Which offer do you want to choose?(or (e) to exit)")
                 if user_replace=="e":
                     print ("e hit so exiting")
                     input()
                     break
-                replace_result=func_other_errorchecking.checkinput(number="y",char="n",min=0,max=2,userinput=user_replace,listinput="")
+                maxoffers=len(picks_for_offers)
+
+                
+                replace_result=func_other_errorchecking.checkinput(number="y",char="n",min=0,max=maxoffers,userinput=int(user_replace),listinput="")
                 if replace_result=="True":
                     replace_sure=input("Are you sure (y)")
                     if replace_sure =="y":
+                        #breakpoint()
                         if int(user_replace)==0:
                             temp_add= int(offer_0[0])
                             temp_add1= int(offer_0[1])
@@ -1053,7 +1172,25 @@ def move_up_down_draft (picks):
                         if int(user_replace)==2:
                             temp_add= int(offer_2[0])
                             temp_add1= int(offer_2[1])
-                        picks.remove(first_round_pick)
+                        if int(user_replace)==3:
+                            temp_add= int(offer_3[0])
+                            temp_add1= int(offer_3[1])
+                        if int(user_replace)==4:
+                            temp_add= int(offer_4[0])
+                            temp_add1= int(offer_4[1])
+                        if int(user_replace)==5:
+                            temp_add= int(offer_5[0])
+                            temp_add1= int(offer_5[1])
+                        if int(user_replace)==6:
+                            temp_add= int(offer_6[0])
+                            temp_add1= int(offer_6[1])
+
+                        #if int(user_replace)==3:
+                        #    picks.remove(second_first_round_pick)
+                        #else:
+                        #    picks.remove(first_round_pick)
+                        remove_pick=picks_for_offers[int(user_replace)]
+                        picks.remove(remove_pick)
                         picks.append(temp_add)
                         picks.append(temp_add1)
                         input ("Ok swapped (press enter to continue)")
@@ -1206,8 +1343,8 @@ def draft_choice_logic(pick_num=3):
         best_gk=47
         best_def=64
         best_mid=81
-        best_ata=97
-        best_pot=100
+        best_ata=100
+        best_pot=0
         best_flawed=0
     elif pick_num < 64:
         best_player=30
@@ -1332,11 +1469,90 @@ def enter_draft(picks,squad,developmentsquad):
                     input ("\nYour turn to pick...(%s)" %(pick_num))
                     os.system('clear')
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
+        
+                    picksleft=[]
+                    for pl in picks:
+                        if pl >= pick_num:
+                            picksleft.append(pl)
 
-                    print("Press: \nh Help Menu\no View your Squad\nx First XI Team report\np for top players by potential\nv value to team(default view) \nf Flawed\ns for (manual) sort\ny draft your player (i.e continue)")
+                    print("Press: \nh Help Menu\no View your Squad\nx First XI Team report\np for top players by potential\nv value to team(default view) \nf Flawed\ns for (manual) sort\ny draft your player (i.e continue)\nd move down draft (if you have a desperate team willing to move up the draft)")
+                    print ("You have picks the following picks left...",picksleft)
+
+                    desperate_pick_offer=0
+                    # so only offer if in first 2 round and we have less that 6 picks already (less than 7 was getting a bit silly)
+                    if int(pick_num) < 65 and (len(picks)<7):
+                        ######################29052019
+                        desperate_pick_offer=1
+                        print ("\n***A desparate team want to jump up in the draft and will offer you***")
+                        global desp_picks_offered,dpick1,dpick2
+                        #desp_picks_offered=0
+                        #gdpick1=0
+                        #gdpick2=0
+
+                        # trying to prevent "new offer" being given on screen re-fresh
+                        if desp_picks_offered==0:
+
+                            if pick_num < 5:
+                                desperation_ranking=random.randint(1,3)
+                                desperation_ranking2=random.randint(5,10)
+                            elif pick_num < 10:
+                                desperation_ranking=random.randint(1,6)
+                                desperation_ranking2=random.randint(4,10)
+                            elif pick_num < 20:
+                                desperation_ranking=random.randint(3,7)
+                                desperation_ranking2=random.randint(5,18)
+                            elif pick_num < 32:
+                                desperation_ranking=random.randint(3,7)
+                                desperation_ranking2=random.randint(5,18)
+                            else:
+                                desperation_ranking=random.randint(1,12)
+                                desperation_ranking2=random.randint(10,25)
+        
+                            tally=0
+                            dpick1=pick_num+desperation_ranking
+                            while dpick1 in picks:
+                                dpick1+=1                  
+                                tally+=1
+                                if tally >6:
+                                    print ("Infinite loop please help...")
+                                    breakpoint()
+                            dpick2=dpick1+desperation_ranking2
+                            while dpick1 in picks:
+                                dpick2+=1                  
+                                tally+=1
+                                if tally >12:
+                                    print ("Infinite loop please help...")
+                                    breakpoint()
+                        
+                            print ("Pick %s and %s for this pick (%s)"%(dpick1,dpick2,pick_num))
+                            desperate_pick_offer=1
+
+                            desp_picks_offered=1
+                            gdpick1=dpick1
+                            gdpick2=dpick2
+                        else:
+                            dpick1=gdpick1
+                            dpick2=gdpick2
+                            print ("Pick %s and %s for this pick (%s)"%(dpick1,dpick2,pick_num))
+                            
+                            desperate_pick_offer=1
+        
+                              
+
+
 
                     #view_draft_valuetoteam()
                     userinput1=input("")
+                    if userinput1=="d" and desperate_pick_offer==1:
+                        #breakpoint()
+                        picks.append(dpick1)
+                        picks.append(dpick2)
+                        picks.sort()
+                        print ("Draft picks swapped")
+                        input("Press a button to continue")
+                        desp_picks_offered=0
+                        break
+                        
                     if userinput1=="h":
                         os.system('clear')
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
@@ -1444,6 +1660,8 @@ def enter_draft(picks,squad,developmentsquad):
                                 pname1=playerselected[1]
                                 sname1=playerselected[2]
                                 input ("%s %s has been signed on %s year contract on wages of %s, press enter to continue" %(pname1,sname1,playerselected[15],playerselected[16]))
+                                # we have rejected the inital desperate team offer so reset the offer for the next pick
+                                desp_picks_offered=0
                                 break
                             else:
                                 input ("That is invalid number please try again...(i a going to return you to the player draft menu)")
@@ -1900,10 +2118,34 @@ def sign_uncontractedplayers(squad,developmentsquad):
                             input("Returning you to main menu, press enter to continue")
                             continue
                         else:
-                            userinput1a=input("Order by VTT(default) or (p)potenital or (u) Age under 24 -undrafted players via PA,(g) Age under 24 -undrafted players via VTT (a)all players sorted by position,(s)Special skill  ")
+                            userinput1a=input("Order by VTT(default) or (p)potenital or (u) Age under 24 -undrafted players via PA,(g) Age under 24 -undrafted players via VTT (a)all players sorted by position,(s)Special skill,(v) Players between 6-8 cost  ")
                             os.system('clear')
                             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
-                        if userinput1a == "g":
+                        if userinput1a == "v":
+                            print("These are the players you can sign ...(between 6-8 cost)")
+                            global count_pb46
+                            count_pb46=0
+
+                            #messey but creating my own sort so higher values for anything between 5 and 8
+                            def sort_list_temp(x):
+                                global count_pb46
+                                tx=x[16]
+                                if tx  < 5:
+                                    return tx + 150
+                                elif tx > 8:
+                                    return tx + 100
+                                else:
+                                    count_pb46+=1
+                                    return tx
+
+                            #outputlimit=int(count_pb46)
+                            outputlimit=45
+                            master_undrafted_rookies.sort(key=sort_list_temp)
+                            func_other_format_input.printplayers(master_undrafted_rookies,draft="ydc",outputlimit=int(count_pb46),justpostion="")
+
+
+
+                        elif userinput1a == "g":
                             print("These are the top 45 players you can sign ...(Ordered by vtt)")
                             under24_triggered=1
                             under_24_temp_list=[]
@@ -2301,11 +2543,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
     season=season_in
     
     printoutput="n"
-    #mdefscore, matascore = func_other_teamreport.report(squad, formation, printoutput)
     defscore, atascore = func_other_teamreport.report(squad, formation, printoutput)
-    #breakpoint()
-
-
 
     if int(normal_season_wins) < 1:
         first_round_pn=1
@@ -2319,7 +2557,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         first_round_pn=random.randint(8,13)
     elif int(normal_season_wins) < 10:
         first_round_pn=random.randint(14,15)
-    elif int(playoff_wins==0):
+    elif int(playoff_wins==-1) or int(playoff_wins==0):
         first_round_pn=random.randint(16,24)
     elif int(playoff_wins==1):
         first_round_pn=random.randint(24,28)
@@ -2327,7 +2565,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         first_round_pn=random.randint(29,30)
     elif int(playoff_wins==3):
         first_round_pn=31
-    elif int(playoff_wins==4):
+    elif int(playoff_wins>3):
         first_round_pn=32
     else:
         input ("Err, not sure on whcih pick number to give you")
@@ -2352,7 +2590,6 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
         input()
         all_round_pn.clear()
     elif bad_ness < -10:
-        breakpoint()
         #delete first round pick
         print ("Because you have massivley breached salary cap rules you have had your first round pick removed")
         input()

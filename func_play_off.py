@@ -17,6 +17,7 @@ lose_in_divisional_exp=1
 lose_in_conference=2
 lose_in_superblowl=3
 win_superbowl=4
+stage_po=0
 
 
 def game_logic(opp_skill_ata,defscore,atascore,opp_skill_def):
@@ -72,7 +73,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     global ngameswon
     ngameswon=int(gameswon)
 
-    playoffwins=0
+    playoffwins=-1
 
     os.system('clear')
     func_other_header.header(status="p", season=season, game=game,defscore=defscore, atascore=atascore)
@@ -80,9 +81,11 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     if ngameswon < 9:
         input("You have not won enough games to enter the playoff's this year")
         #playoffwins=-1
-        return (normal_exp,playoffwins)
+        stage_po=0
+        return (normal_exp,playoffwins,stage_po)
 
     if ngameswon < 11:
+        playoffwins=0
 
 
         input("Entering Season play offs")
@@ -94,7 +97,8 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
         print (wildcard_def,wildcard_ata)
         if won_game == 0:
             input ("Unlucky try again next season...")
-            return (lose_in_wildcard_exp,playoffwins)
+            stage_po=1
+            return (lose_in_wildcard_exp,playoffwins,stage_po)
 
         else:
             playoffwins+=1
@@ -106,7 +110,8 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     print (divisional_def,divisional_ata)
     if won_game == 0:
         input ("Unlucky try again next season...")
-        return (lose_in_wildcard_exp,playoffwins)
+        stage_po=2
+        return (lose_in_divisional_exp,playoffwins,stage_po)
 
     else:
         playoffwins+=1
@@ -119,7 +124,8 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     print (conference_def,conference_ata)
     if won_game == 0:
         input ("Unlucky try again next season...")
-        return (lose_in_wildcard_exp,playoffwins)
+        stage_po=3
+        return (lose_in_conference,playoffwins,stage_po)
     else:
         playoffwins+=1
 
@@ -131,11 +137,13 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     print (superbowl_def,superbowl_ata)
     if won_game == 0:
         input ("Unlucky try again next season...")
-        return (lose_in_superblowl,playoffwins)
+        stage_po=4
+        return (lose_in_superblowl,playoffwins,stage_po)
     else:
         playoffwins+=1
+        stage_po=5
         input ("Woop Superbowl won...")
-        return (win_superbowl,playoffwins)
+        return (win_superbowl,playoffwins,stage_po)
 
         
 

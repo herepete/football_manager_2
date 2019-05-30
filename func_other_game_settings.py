@@ -27,7 +27,7 @@ freeagency_ata=15
 startseason = 1 # needs to be less than season to play
 auto_save_game="y" # else = no, game is saved at end of every season
 seasonstoplay = 20
-age_for_super_powers=26 # could be any age, by super powers i mean a Good trainer or a superb trainer, drafted/undfrated players have better contract renewals , so setting to low means contract renewals are harder , to high and its hard to get your own players the powers
+age_for_super_powers=25 # could be any age, by super powers i mean a Good trainer or a superb trainer, drafted/undfrated players have better contract renewals , so setting to low means contract renewals are harder , to high and its hard to get your own players the powers
 skill_set_for_Good_trainer=41#player_exp+player_ablity+player_char
 skill_set_for_Superb_trainer=48#player_exp+player_ablity+player_char
 
