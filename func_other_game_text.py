@@ -60,7 +60,7 @@ Good luck & enjoy :)
 
         if userinput == "a":
             while True:
-                os.system('clear')
+                a=os.system('cls||clear')
                 print("Team Choice=", teamiwant)
 
                 whattodo = input(
@@ -126,14 +126,14 @@ def initaldrafthelp():
 
 if __name__ == "__main__":
     import os
-    os.system('clear')
+    a=os.system('cls||clear')
     print ("Unit testing\n\n\n\n\n")
     intro()
     input("Press enter to continue")
-    os.system('clear')
+    a=os.system('cls||clear')
     intro(printrules="y")
     input("Press enter to continue")
-    os.system('clear')
+    a=os.system('cls||clear')
     player_atrributes()
 
     

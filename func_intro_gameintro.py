@@ -77,7 +77,7 @@ def intro(incoming_season, game, defscore, atascore):
     season=incoming_season
     p_season_results=""
 
-    os.system('clear')
+    a=os.system('cls||clear')
 
     players = func_other_create_players.createplayers(
         gk=squad_size_gk, defender=squad_size_def, mid=squad_size_mid, ata=squad_size_ata, qualityofplayer=func_other_game_settings.inital_top_range_player, maxageofplayer=maxage, minageofplayer=minage, ef="123")
@@ -110,7 +110,7 @@ def intro(incoming_season, game, defscore, atascore):
                 masterdefscore, masteratascore = func_other_teamreport.report(players, formation, printoutput)
                 func_other_header.header(status="i", season=season, game=game,defscore=masterdefscore, atascore=masteratascore)
         else:
-            os.system('clear')
+            a=os.system('cls||clear')
             func_other_header.header(status="i", season=season, game=game,defscore=masterdefscore, atascore=masteratascore)
 
 
@@ -119,7 +119,7 @@ def intro(incoming_season, game, defscore, atascore):
     if newteam == 1:
         players = players2
 
-    os.system('clear')
+    a=os.system('cls||clear')
     func_other_header.header(status="i", season=season, game=game,
                        defscore=masterdefscore, atascore=masteratascore)
 

@@ -3,6 +3,7 @@ import func_other_header
 import os
 import func_other_menu
 import random
+import time
 
 global previous_results
 previous_results=[]
@@ -37,10 +38,10 @@ def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
         opposition_skill.append(random_opps)
 
     while True:
-        os.system('clear')
+        a=os.system('cls||clear')
         func_other_header.header(status="s", season=season, game=game,defscore=defscore, atascore=atascore)
         input ("Press enter to start the season")
-        os.system('clear')
+        a=os.system('cls||clear')
         func_other_header.header(status="s", season=season, game=game,defscore=defscore, atascore=atascore)
         print ("Season results...")
 
@@ -93,7 +94,7 @@ def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
                     print (" Game Won - in overtime")
                 else:
                     print (" Game lost - in overtime")
-
+            time.sleep(1)
             game+=1
             if game ==16:
                 break

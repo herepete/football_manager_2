@@ -371,7 +371,7 @@ if __name__ == "__main__":
 # allow for batch testing
 
     import os
-    os.system('clear')
+    a=os.system('cls||clear')
     print ("#############")
     print ("To play the game run main.py this will just run some units tests on all the functions in the file")
     print ("#############")

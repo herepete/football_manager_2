@@ -432,7 +432,7 @@ def training(season, game, defscore, atascore, squad,devsquad,experience_gained)
     # this is what is called by main.py
     # we are going to turn everything into "global variables" 
     #so we don't need to pass data back and forth everywhere
-    os.system('clear')
+    a=os.system('cls||clear')
     func_other_header.header(status="est", season=season, game=game,defscore=defscore, atascore=atascore)
 
     global local_season,local_game_local_defscore,local_atascore,local_squad,local_devsquad,skilincrease,random_number_loss
@@ -667,7 +667,7 @@ def training(season, game, defscore, atascore, squad,devsquad,experience_gained)
 
     while True:
 
-        #os.system('clear')
+        #a=os.system('cls||clear')
         #func_other_header.header(status="est", season=season, game=game,defscore=defscore, atascore=atascore)
 
         #input("Press a button to Continue")

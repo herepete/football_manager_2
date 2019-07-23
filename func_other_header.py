@@ -22,7 +22,7 @@ def header(status, season, game, defscore, atascore):
 """
 
     if status == "i":
-        os.system('clear')
+        a=os.system('cls||clear')
         print(colored('Intro', 'red'), colored('>>>', 'white'), colored('Season', 'white'), colored('>>>', 'white'), colored("Play Off's", 'white'), colored('>>>', 'white'), colored('End of Season -Training', 'white'),colored('>>>', 'white'),colored('End of Season -Draft', 'white'),colored('>>>','white'),colored('End of game', 'white'))
 
     elif status == "s":
@@ -54,7 +54,7 @@ def header(status, season, game, defscore, atascore):
 if __name__=="__main__":
     # to unit test output
     import os
-    os.system('clear')
+    a=os.system('cls||clear')
     header(status="i", season=1, game=1, defscore=20, atascore=30)
     header(status="s", season=1, game=1, defscore=20, atascore=30)
     header(status="p", season=1, game=1, defscore=20, atascore=30)

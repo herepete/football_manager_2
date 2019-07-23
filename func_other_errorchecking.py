@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import os
-os.system('clear')
+a=os.system('cls||clear')
 
 def checkinput(number,char,min,max,userinput,listinput=""):
 

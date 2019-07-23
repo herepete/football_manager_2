@@ -12,7 +12,7 @@ import os
 def endofgame(season, game, defscore, atascore, squad):
 
     while True:
-        os.system('clear')
+        a=os.system('cls||clear')
         func_other_header.header(status="eg", season=season, game=game,
                        defscore=defscore, atascore=atascore)
         userinput= input("You have reached the end of the game (if you want to conintnue edit func_other_game_settings.py and change the seasonstoplay variable , then rerun the game loading the previous saved file)\n")

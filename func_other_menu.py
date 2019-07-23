@@ -196,7 +196,7 @@ def menu(oursquad, formation, printoutput):
 
     '''
 
-    #os.system('clear')
+    #a=os.system('cls||clear')
 
     useroption=input("For help on ... Press:\nr for rules\na for player attribute breakdown\nf for finance \nd for draft logic\nt for training info \ne End of Season -Draft\nds for Development + Squad\npc for Players contracts\npp Caculating player Potential\npv Caculating players value to team (vtt)\nsc Special Char notes")
     

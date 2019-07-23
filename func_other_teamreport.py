@@ -698,7 +698,7 @@ def report(oursquad, formation, printoutput):
 if __name__ == "__main__":
 
     import os
-    os.system('clear')
+    a=os.system('cls||clear')
     #print ("Unit testing - function ourteamscores...\n")
     #print ("Here is a first X1 to work with...\n")
 
@@ -710,7 +710,7 @@ if __name__ == "__main__":
     #ourteamscores (ourfirstx1=firstx1, printoutput="y", totalchar=1, totaldet=2, totalexp=3)
 
     print (input("Press a button"))
-    os.system('clear')
+    a=os.system('cls||clear')
     print ("Unit testing - function report & sortteam (hard to seperate)...\n")
 
     import func_other_create_players
