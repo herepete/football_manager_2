@@ -46,7 +46,8 @@ def header(status, season, game, defscore, atascore):
 
 
 
-    print("Season %s Game %s" % (season, game))
+    print("Season ", season)
+    #print("Season %s Game %s" % (season, game))
     print("First XI Defensive score ", defscore)
     print("First XI Attacking score ", atascore)
     print("##################################")
