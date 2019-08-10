@@ -4,6 +4,8 @@ import os
 import func_other_menu
 import random
 import time
+import pdb
+import func_game_engine
 
 global previous_results
 previous_results=[]
@@ -32,8 +34,33 @@ def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
     global previousseasonresults 
     opposition_skill=[]
     for i in range(0,16):
-        random_defscore=random.randint(70,85)
-        random_atascore=random.randint(68,85)
+
+        #after quite a lot of batch testing i came up with this:
+        # our def ,our ata , %win rate (over 1,000 games) -including overtime
+        # 70 v 70 = 13.3%
+        # 80 v 80 = 42.9%
+        # 85 v 85 = 63.8%
+        # 90 v 90 = 79.6%
+        # 95 v 95 = 88%
+        # 99 v 99 = 90%
+                   
+        truely_random=random.randint(1,10)
+        if truely_random <3:
+            random_defscore=random.randint(70,80)
+            random_atascore=random.randint(70,80)
+        elif truely_random <7:
+            random_defscore=random.randint(75,85)
+            random_atascore=random.randint(75,85)
+        elif truely_random <8:
+            random_defscore=random.randint(78,87)
+            random_atascore=random.randint(78,87)
+        elif truely_random <9:
+            random_defscore=random.randint(80,90)
+            random_atascore=random.randint(80,90)
+        else:
+            random_defscore=random.randint(85,95)
+            random_atascore=random.randint(85,95)
+
         random_opps=[random_defscore,random_atascore]
         opposition_skill.append(random_opps)
 
@@ -43,14 +70,16 @@ def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
         input ("Press enter to start the season")
         a=os.system('cls||clear')
         func_other_header.header(status="s", season=season, game=game,defscore=defscore, atascore=atascore)
-        print ("Season results...")
+        seasonresults=[]
 
         while True:
+            #inspiraction taken from http://hjemmesider.diku.dk/~torbenm/Troll/RPGdice.pdf
 
             opp_skill_def, opp_skill_ata=opposition_skill.pop()
             #print ("Opposition skills ",opp_skill_def,opp_skill_ata)
             
             #goals against
+            '''
             ga=round((opp_skill_ata-defscore)/5)
             if ga <1:
                 ga=1
@@ -64,16 +93,21 @@ def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
                 gf=1
             gf=random.randint(0,gf)
 
-            print ("us - %s , opp-%s oppd-%s oppa-%s" %(gf,ga,opp_skill_def,opp_skill_ata),end="")
+            #print ("%s us - %s , opp-%s oppd-%s oppa-%s" %(game,gf,ga,opp_skill_def,opp_skill_ata),end="")
+            game=game+1
+            tempresults=("Game %s us - %s , opp-%s " %(game,gf,ga))
 
             if int(ga) > int(gf):
                 pass
-                print (" Game lost")
+                #print (" Game lost")
+                tempresults=tempresults + (" Game lost")
                 #lost
             elif ga <gf:
                 #won
                 ourwins+=1
-                print (" Game Won")
+                #print (" Game Won")
+                tempresults=tempresults + (" Game Won")
+                
             else:
                 #draw
                 opp_score=opp_skill_def+opp_skill_ata
@@ -91,13 +125,31 @@ def season(season, game, defscore, atascore, squad,tpreviousseasonresults):
                 
                 if drawresult>0:
                     ourwins+=1
-                    print (" Game Won - in overtime")
+                    #print (" Game Won - in overtime")
+                    tempresults=tempresults + (" Game Won  - in overtime")
                 else:
-                    print (" Game lost - in overtime")
+                    #print (" Game lost - in overtime")
+                    tempresults=tempresults + (" Game lost  - in overtime")
+            '''
+            game=game+1
+            gamenum= ("Game %s "%(game))
+            tempresults=func_game_engine.game_result(ourdef=defscore,ourata=atascore,oppdef=opp_skill_def,oppata=opp_skill_ata)
+            #game=game+1
+            if "Win" in tempresults:
+                ourwins+=1
+            tempresults=gamenum+tempresults
+            seasonresults.append(tempresults)
+            tempresults=""
+            print ("Season results...")
+            for results in seasonresults:
+                print (results)
             time.sleep(1)
-            game+=1
+
             if game ==16:
                 break
+            else:
+                a=os.system('cls||clear')
+                func_other_header.header(status="s", season=season, game=game,defscore=defscore, atascore=atascore)
 
         print ("Games Won ",ourwins)
 

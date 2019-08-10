@@ -674,10 +674,12 @@ def renewplayercontract(squad,developmentsquad):
                    elif vttvalue  <60:
                     wage=2
                    elif vttvalue  <65:
-                    wage=3
+                    wage=2
                    elif vttvalue  <70:
+                    wage=3
+                   elif vttvalue  <73:
                     wage=4
-                   elif vttvalue  <75:
+                   elif vttvalue  <76:
                     wage=5
                    elif vttvalue  <80:
                     wage=6
@@ -695,28 +697,40 @@ def renewplayercontract(squad,developmentsquad):
                            wage_p1=wage+0
                            wage_p2=wage+0
                            wage_p3=wage+0
+                           wage_p4=wage+1
                        elif playertorenew_sc=="U":
                            print ("\nThe player feels a semi-loyalty to the team as we was drafted by you so he is willing to take a slightly smaller contract than otherwise expected...")
                            wage_p1=wage+1
                            wage_p2=wage+1
-                           wage_p3=wage+2
-
-                       else:
-                           wage_p1=wage+4
-                           wage_p2=wage+3
-                           wage_p3=wage+2
-                   else:
-                       if playertorenew_sc=="U":
-                           print ("\nThe player feels a semi-loyalty to the team as we was drafted by you so he is willing to take a slightly smaller contract than otherwise expected...")
-                           wage_p1=wage-1
-                           wage_p2=wage+0
                            wage_p3=wage+1
-                           wage+=1
-
+                           wage_p4=wage+2
+                       elif playertorenew_age>30:
+                           wage_p1=wage+2
+                           wage_p2=wage+1
+                           wage_p3=wage+0
+                           wage_p4=wage-1
                        else:
                            wage_p1=wage+0
                            wage_p2=wage+1
-                           wage_p3=wage+3
+                           wage_p3=wage+2
+                           wage_p4=wage+3
+                   else:
+                       if playertorenew_sc=="U":
+                           print ("\nThe player feels a semi-loyalty to the team as we was drafted by you so he is willing to take a slightly smaller contract than otherwise expected...")
+                           wage_p1=wage+0
+                           wage_p2=wage+0
+                           wage_p3=wage+1
+                           wage_p4=wage+1
+                       elif playertorenew_age<24:
+                           wage_p1=wage+0
+                           wage_p2=wage+0
+                           wage_p3=wage+1
+                           wage_p4=wage+1
+                       else:
+                           wage_p1=wage+0
+                           wage_p2=wage+1
+                           wage_p3=wage+1
+                           wage_p4=wage+2
                    if wage >1:
                        wage_m1=wage-1
                    if int(playertorenew_age)>32:
@@ -725,7 +739,7 @@ def renewplayercontract(squad,developmentsquad):
                    print ("1 year contract with Wage=", wage_p1)
                    print ("2 year contract with Wage=", wage_p2)
                    print ("3 year contract with Wage=", wage_p3)
-                   print ("4 year contract with Wage=", wage)
+                   print ("4 year contract with Wage=", wage_p4)
                    user_input=input("Enter 1/2/3/4 or e to exit? ")
                    breakhit=0
                    while True:
@@ -2169,7 +2183,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                         maxbudget,players_wages,maxbudget_minus_players_wages=func_other_menu.finance_report(squad,returnv="y")
                         # inital safety check
                         under24_triggered=0
-                        if maxbudget_minus_players_wages < 1:
+                        if maxbudget_minus_players_wages < 0:
                             print ("You do not have enough money to sign any players")
                             input()
                             breakhit11=1
@@ -2583,7 +2597,7 @@ def record_signing_player(ppostion,pname,playerdraftinfo,playersoldinfo=""):
 
 
 
-def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstround,thisyear_secondround,nextyear_secondround,thisyear_thirdround,nextyear_thirdround,developmentsquad,normal_season_wins,playoff_wins,season_in):
+def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstround,thisyear_secondround,nextyear_secondround,thisyear_thirdround,nextyear_thirdround,developmentsquad,normal_season_wins,playoff_wins,season_in,stage_po):
 
     first_round_pn=0
     second_round_pn=0
@@ -2604,12 +2618,48 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
     printoutput="n"
     defscore, atascore = func_other_teamreport.report(squad, formation, printoutput)
 
-    if int(normal_season_wins) < 1:
+
+    if stage_po==5: #superbowl win
+        first_round_pn=32
+    elif stage_po==4:#superbowl loss
+        first_round_pn=31
+    elif stage_po==3:# conference game loss
+        first_round_pn=random.randint(29,30)
+    elif stage_po==2: #division game loss
+        first_round_pn=random.randint(24,28)
+    elif stage_po==1: # wildcardloss
+        first_round_pn=random.randint(16,24)
+    else: # stage_po==0 # no playoffs
+        if int(normal_season_wins) ==0:
+            first_round_pn=1
+        elif int(normal_season_wins) < 2:
+            first_round_pn=random.randint(1,3)
+        elif int(normal_season_wins) < 3:
+            first_round_pn=random.randint(2,4)
+        elif int(normal_season_wins) < 4:
+            first_round_pn=random.randint(4,5)
+        elif int(normal_season_wins) < 6:
+            first_round_pn=random.randint(5,7)
+        elif int(normal_season_wins) < 7:
+            first_round_pn=random.randint(7,12)
+        elif int(normal_season_wins) < 8:
+            first_round_pn=random.randint(8,13)
+        elif int(normal_season_wins) < 10:
+            first_round_pn=random.randint(14,15)
+        else:
+            input("hmm that's odd")
+    
+    '''
+    if int(normal_season_wins) ==0:
         first_round_pn=1
+    elif int(normal_season_wins) < 2:
+        first_round_pn=random.randint(1,3)
     elif int(normal_season_wins) < 3:
-        first_round_pn=random.randint(1,4)
+        first_round_pn=random.randint(2,4)
+    elif int(normal_season_wins) < 4:
+        first_round_pn=random.randint(4,5)
     elif int(normal_season_wins) < 6:
-        first_round_pn=random.randint(5,6)
+        first_round_pn=random.randint(5,7)
     elif int(normal_season_wins) < 7:
         first_round_pn=random.randint(7,12)
     elif int(normal_season_wins) < 8:
@@ -2629,6 +2679,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
     else:
         input ("Err, not sure on whcih pick number to give you")
         breakpoint()
+    '''
     
     
     all_round_pn.append(first_round_pn)
@@ -2877,6 +2928,31 @@ if __name__=="__main__":
 
     defscore=99
     atascore=99
+
+    print("Enter A to test draft function (check draft pick based on regular season wins and play off wins")
+    ui=input("")
+    if ui =="A":
+        game= 0
+        idefscore= 90,
+        iatascore = 95 
+        squad= [['Gk', 'Jonathon', 'Graves', 32, 86, 10, 7, 15, 17, 20, 15, 14, 23, 94, 85, 1, 10, 'ST'], ['Gk', 'Kendall', 'Cisneros', 21, 49, 2, 2, 11, 9, 16, 18, 17, 7, 61, 69, 0, 1, ''], ['Gk', 'Elvis', 'Singleton', 23, 88, 1, 8, 17, 16, 17, 20, 20, 12, 99, 88, 3, 10, 'D'], ['Def', 'Ollie', 'Matthews', 23, 3, 80, 52, 17, 13, 20, 20, 19, 12, 93, 86, 3, 9, 'D'], ['Def', 'Connie', 'Payne', 21, 10, 44, 21, 17, 11, 14, 11, 9, 7, 62, 58, 0, 1, ''], ['Def', 'Harold', 'Davila', 25, 5, 49, 25, 15, 20, 20, 20, 13, 15, 73, 96, 0, 2, ''], ['Def', 'Warner', 'Wallace', 22, 9, 89, 48, 10, 19, 20, 20, 20, 8, 91, 98, 1, 4, 'D'], ['Def', 'Williams', 'Sanchez', 21, 6, 66, 23, 12, 18, 16, 12, 18, 4, 72, 80, 0, 1, ''], ['Def', 'Mac', 'Moon', 30, 9, 92, 42, 14, 20, 18, 14, 17, 16, 96, 88, 1, 11, 'ST'], ['Def', 'Brandon', 'Sutton', 33, 8, 80, 37, 12, 17, 17, 13, 17, 21, 86, 80, 2, 7, 'ST'], ['Def', 'Garry', 'Luna', 27, 7, 63, 28, 6, 20, 20, 20, 15, 16, 73, 98, 3, 4, 'ST'], ['Mid', 'Nathan', 'Lyons', 24, 6, 68, 55, 15, 19, 10, 20, 13, 4, 71, 82, 0, 1, ''], ['Mid', 'Christoper', 'Stevens', 24, 10, 68, 97, 17, 20, 7, 20, 20, 12, 93, 84, 1, 7, 'D'], ['Mid', 'Shawn', 'Benjamin', 23, 4, 38, 41, 20, 15, 13, 6, 7, 4, 58, 57, 0, 1, ''], ['Mid', 'Daren', 'Hartman', 24, 6, 84, 68, 19, 19, 16, 19, 20, 8, 91, 92, 1, 4, 'D'], ['Mid', 'Francisco', 'Gallagher', 38, 6, 32, 33, 11, 20, 16, 17, 18, 25, 58, 90, 0, 3, 'ST'], ['Mid', 'Damien', 'Nolan', 24, 7, 71, 71, 16, 14, 19, 20, 17, 10, 86, 85, 3, 7, 'U'], ['Mid', 'Deon', 'Rodriguez', 20, 2, 44, 40, 12, 17, 13, 13, 20, 7, 60, 76, 0, 1, ''], ['Mid', 'Jamaal', 'Travis', 21, 3, 88, 83, 20, 20, 20, 12, 20, 6, 95, 90, 2, 4, 'D'], ['Ata', 'Ezekiel', 'Jenkins', 20, 10, 1, 89, 9, 20, 18, 20, 14, 6, 86, 94, 2, 4, 'D'], ['Ata', 'Lazaro', 'Lam', 23, 10, 1, 88, 20, 20, 14, 20, 14, 12, 100, 90, 3, 10, 'D'], ['Ata', 'Guillermo', 'Henry', 21, 3, 7, 71, 20, 19, 9, 20, 20, 4, 84, 84, 3, 4, 'D'], ['Ata', 'Mose', 'Villanueva', 23, 10, 7, 87, 18, 20, 16, 20, 16, 10, 98, 93, 0, 4, 'D'], ['Ata', 'Edmond', 'Norris', 33, 9, 10, 98, 20, 19, 20, 19, 20, 26, 100, 97, 3, 10, 'ST']]
+        thisyear_firstround = 1 
+        nextyear_firstround= 1 
+        thisyear_secondround= 1 
+        nextyear_secondround= 1 
+        thisyear_thirdround= 1 
+        nextyear_thirdround= 1 
+        developmentsquad= [['Gk', 'Granville', 'Peterson', 24, 42, 5, 6, 18, 12, 8, 10, 6, 4, 52, 56, 1, 1, ''], ['Gk', 'Issac', 'Lin', 21, 46, 10, 8, 15, 16, 16, 19, 13, 4, 58, 79, 1, 1, ''], ['Def', 'Eduardo', 'Walters', 24, 3, 43, 20, 13, 7, 13, 5, 6, 4, 51, 48, 1, 1, ''], ['Def', 'Guadalupe', 'Avila', 20, 5, 44, 23, 7, 7, 19, 5, 13, 3, 47, 55, 1, 1, ''], ['Mid', 'Ruben', 'Wilkinson', 19, 6, 38, 28, 17, 7, 19, 7, 5, 1, 47, 62, 1, 1, ''], ['Mid', 'Sergio', 'Jacobs', 22, 2, 47, 37, 5, 20, 14, 7, 20, 3, 48, 70, 1, 1, ''], ['Ata', 'Jefferson', 'Rosas', 20, 2, 2, 42, 7, 14, 13, 10, 12, 2, 46, 58, 1, 1, ''], ['Ata', 'Harris', 'Morton', 24, 4, 5, 40, 20, 10, 7, 12, 9, 2, 56, 56, 1, 1, '']]
+        normal_season_wins= 14
+        playoff_wins= 1
+        season_in= 6
+    
+        draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstround,thisyear_secondround,nextyear_secondround,thisyear_thirdround,nextyear_thirdround,developmentsquad,normal_season_wins,playoff_wins,season_in)
+        
+
+
+    else:
+        print ("No valid input entered")
 
 
 

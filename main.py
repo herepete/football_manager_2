@@ -110,7 +110,7 @@ while season != seasonstoplay:
     # end of season training
     squad,devsquad=func_endofseason_training.training(season=season, game=game,defscore=defscore, atascore=atascore, squad=players,devsquad=developmentsquad,experience_gained=exp_gained)
     # end of season draft
-    func_endofseason_draft.draft(game=game,idefscore=defscore, iatascore=atascore, squad=players,thisyear_firstround=thisyear_firstround,nextyear_firstround=nextyear_firstround,thisyear_secondround=thisyear_secondround,nextyear_secondround=nextyear_secondround,thisyear_thirdround=thisyear_thirdround,nextyear_thirdround=nextyear_thirdround,developmentsquad=developmentsquad,normal_season_wins=normal_season_wins,playoff_wins=playoff_wins,season_in=season)
+    func_endofseason_draft.draft(game=game,idefscore=defscore, iatascore=atascore, squad=players,thisyear_firstround=thisyear_firstround,nextyear_firstround=nextyear_firstround,thisyear_secondround=thisyear_secondround,nextyear_secondround=nextyear_secondround,thisyear_thirdround=thisyear_thirdround,nextyear_thirdround=nextyear_thirdround,developmentsquad=developmentsquad,normal_season_wins=normal_season_wins,playoff_wins=playoff_wins,season_in=season,stage_po=stage_po)
     #add end of seasons playoff result to 
     len_previousresults=len(previousresults)-1
     if stage_po==0:
