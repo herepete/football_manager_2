@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
-a=os.system('cls||clear')
+import func_clear_screen
+func_clear_screen.clear_screen()
 
 def checkinput(number,char,min,max,userinput,listinput=""):
 

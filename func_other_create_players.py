@@ -9,6 +9,7 @@ import func_other_game_settings
 import func_other_format_input
 import csv
 import pdb
+import func_clear_screen
 
 # Explanantion of skills
 
@@ -390,7 +391,7 @@ if __name__ == "__main__":
 # allow for batch testing
 
     import os
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     print ("#############")
     print ("To play the game run main.py this will just run some units tests on all the functions in the file")
     print ("#############")

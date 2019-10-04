@@ -4,6 +4,7 @@ import func_other_menu
 import func_game_engine
 import os
 import random
+import func_clear_screen
 
 
 '''
@@ -89,7 +90,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
 
     playoffwins=-1
 
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     func_other_header.header(status="p", season=season, game=game,defscore=defscore, atascore=atascore)
 
     if ngameswon < 9:
@@ -165,7 +166,7 @@ def playoff(season, game, defscore, atascore, squad,gameswon=9):
     
 
     #while True:
-    #    a=os.system('cls||clear')
+    #    func_clear_screen.clear_screen()
     #    func_other_header.header(status="p", season=season, game=game,defscore=defscore, atascore=atascore)
     #    userinput= input("Press enter to continue or m for menu\n")
     #    if userinput=="m":

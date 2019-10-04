@@ -10,6 +10,7 @@ import func_other_errorchecking
 import random
 import func_other_game_settings
 import pdb
+import func_clear_screen
 
 #from itertools import permutations
 from itertools import combinations 
@@ -1469,7 +1470,7 @@ def enter_draft(picks,squad,developmentsquad):
                     print ("Your picks ",picks)
 
                 elif int(pick_num)>=33 and int(pick_num)<=64:
-                    a=os.system('cls||clear')
+                    func_clear_screen.clear_screen()
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                     print ("Second Round")
                     global player_selected
@@ -1478,7 +1479,7 @@ def enter_draft(picks,squad,developmentsquad):
                     print ("Your picks ",picks)
                     
                 elif int(pick_num)>=65:
-                    a=os.system('cls||clear')
+                    func_clear_screen.clear_screen()
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                     print ("Third Round")
                     if int(pick_num)==65:
@@ -1495,7 +1496,7 @@ def enter_draft(picks,squad,developmentsquad):
                         breakhit=1
                         break
                     input ("\nYour turn to pick...(%s)" %(pick_num))
-                    a=os.system('cls||clear')
+                    func_clear_screen.clear_screen()
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
         
                     picksleft=[]
@@ -1614,8 +1615,10 @@ def enter_draft(picks,squad,developmentsquad):
                     userinput1=input("")
                     if userinput1=="d" and desperate_pick_offer==1:
                         #breakpoint()
+                        #add and remove items to our picks list
                         picks.append(dpick1)
                         picks.append(dpick2)
+                        picks.remove(pick_num)
                         if third_pick_offer==1:
                             picks.append(dpick3)
                         picks.sort()
@@ -1627,12 +1630,12 @@ def enter_draft(picks,squad,developmentsquad):
                         break
                         
                     if userinput1=="h":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         func_other_menu.menu(oursquad=squad, formation=1442, printoutput="y")
                         continue
                     if userinput1=="x":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         func_other_teamreport.report(oursquad=squad, formation=1442, printoutput="y")
                         input ("\nPress enter to continue")
@@ -1763,7 +1766,7 @@ def enter_draft(picks,squad,developmentsquad):
                     # all our picks then exit draft to next page opn menu?
 
                     if userinput1=="o":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         func_other_format_input.printplayers(squad,draft="n",outputlimit=100,justpostion="")
                         print ("\nHere Is your Development squad\n")
@@ -1771,25 +1774,25 @@ def enter_draft(picks,squad,developmentsquad):
                         input("Press a button to conitnue")
                         
                     if userinput1=="p":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         view_draft_potential()
                         input("Press a button to conitnue")
                         #continue
                     elif userinput1=="v":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         view_draft_valuetoteam()
                         input("Press a button to conitnue")
                         #continue
                     elif userinput1=="f":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         view_draft_flawed_genius()
                         input("Press a button to conitnue")
                         #continue
                     elif userinput1=="s":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         userinput2=input ("Enter an option to sort by : \n\nA -age\nGS -Goalkeeper skill\nDS -Defense Skill\nAS -Attack Skill\nF -Fitness\nAb -Ability\nC -Char\nD -Determination\nL -Luck\nE -experience\nVTT -Value to team\nPA -Potential Ability\ne To exit\n")
                         if userinput2=="e":
@@ -1843,11 +1846,11 @@ def enter_draft(picks,squad,developmentsquad):
             else:
                 draft_choice_logic(pick_num=pick_num)
                 if int(pick_num)==33:
-                    a=os.system('cls||clear')
+                    func_clear_screen.clear_screen()
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                     print ("Second Round")
                 if int(pick_num)==65:
-                    a=os.system('cls||clear')
+                    func_clear_screen.clear_screen()
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                     print ("Third Round")
         global undrafted_rookies
@@ -2083,7 +2086,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
 
 
     while True:
-        a=os.system('cls||clear')
+        func_clear_screen.clear_screen()
         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
         print("You know have the final chance to make changes to your squad before the new season\n\nPress\nh Help Menu\no View your Squad\nx First XI Team report\ns to sign undrafted/free agents \nr Renew/release (out of contract players)\nq quit draft page and start the new season (i.e continue) ")
         numberofplayers_outofcontract=count_outofcontactplayers(squad)
@@ -2099,7 +2102,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
 
         userinput7=input()
         if userinput7=="h":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             func_other_menu.menu(oursquad=squad, formation=1442, printoutput="y")
             continue
@@ -2108,7 +2111,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                     breakhit11=0
                     printoutput="n"
                     defscore, atascore = func_other_teamreport.report(squad, formation, printoutput)
-                    a=os.system('cls||clear')
+                    func_clear_screen.clear_screen()
                     func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
 
                     print("This is your last chance to improve your squad before the new season, you cannot exceed your budget though doing it...")
@@ -2120,12 +2123,12 @@ def sign_uncontractedplayers(squad,developmentsquad):
                     #view_draft_valuetoteam()
                     userinput1=input("")
                     if userinput1=="h":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         func_other_menu.menu(oursquad=squad, formation=1442, printoutput="y")
                         continue
                     if userinput1=="u":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         players_under_24=[]
                         for uplayer in master_undrafted_rookies:
@@ -2144,14 +2147,14 @@ def sign_uncontractedplayers(squad,developmentsquad):
 
 
                     if userinput1=="x":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         func_other_teamreport.report(oursquad=squad, formation=1442, printoutput="y")
                         input ("\nPress enter to continue")
                         breakhit11=1
                         continue
                     if userinput1=="o":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         func_other_format_input.printplayers(squad,draft="n",outputlimit=100,justpostion="")
                         print ("\nHere Is your Development squad\n")
@@ -2159,21 +2162,21 @@ def sign_uncontractedplayers(squad,developmentsquad):
                         input("Press a button to conitnue")
                         breakhit11=1
                     if userinput1=="p":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         view_draft_potential(fa="y")
                         input("Press a button to conitnue")
                         breakhit11=1
                         #continue
                     elif userinput1=="v":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         view_draft_valuetoteam(fa="y")
                         input("Press a button to conitnue")
                         breakhit11=1
                         #continue
                     elif userinput1=="f":
-                        a=os.system('cls||clear')
+                        func_clear_screen.clear_screen()
                         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         view_draft_flawed_genius(fa="y")
                         input("Press a button to conitnue")
@@ -2192,7 +2195,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                             continue
                         else:
                             userinput1a=input("Order by VTT(default) or (p)potenital or (u) Age under 24 -undrafted players via PA,(g) Age under 24 -undrafted players via VTT (a)all players sorted by position,(s)Special skill,(v) Players between 6-8 cost  ")
-                            a=os.system('cls||clear')
+                            func_clear_screen.clear_screen()
                             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                         if userinput1a == "v":
                             print("These are the players you can sign ...(between 6-8 cost)")
@@ -2557,7 +2560,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
                 return(squad,developmentsquad)
                 #break
         if userinput7=="r":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             #breakpoint()
             squad,developmentsquad=renewplayercontract(squad,developmentsquad)
@@ -2565,7 +2568,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
             input("Press a button to conitnue")
             continue
         if userinput7=="o":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             print ("\nHere Is your first team squad\n")
             func_other_format_input.printplayers(squad,draft="n",outputlimit=100,justpostion="")
@@ -2574,7 +2577,7 @@ def sign_uncontractedplayers(squad,developmentsquad):
             input("Press a button to conitnue")
             continue
         if userinput7=="x":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             func_other_teamreport.report(oursquad=squad, formation=1442, printoutput="y")
             input ("\nPress enter to continue")
@@ -2722,7 +2725,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
 
 
     while True:
-        a=os.system('cls||clear')
+        func_clear_screen.clear_screen()
         func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
         #print("Press enter to continue or m for menu,p see draft potential,v for value to team \n,f for flawed genius y View your squad, d see Full Draft , r Renew players contracts ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
         print("Press: \nh Help menu\td Scout Draft\tv View your Squad\tx First XI Team Report\tr Change (out of contract players)\te Enter draft(i.e Continue)\ts Sell a player\tm move up/down draft board\nhd History of draft ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
@@ -2749,7 +2752,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
 
         userinput=input("")
         if userinput=="hd":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             global player_history
             print ("Previous draft picks")
@@ -2765,18 +2768,18 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             input()
             continue
         if userinput=="h":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             func_other_menu.menu(oursquad=squad, formation=1442, printoutput="y")
             continue
         if userinput=="m":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             picks=move_up_down_draft(all_round_pn)
             continue
             
         if userinput=="e":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             squad=enter_draft(all_round_pn,squad,developmentsquad)
             #breakpoint()
@@ -2798,7 +2801,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             if count_all_round_pn >= max_draft_picks_allowed:
                 print ("\nYou have to many picks already please move up the draft to create a spot (you can have %s at max)" %(max_draft_picks_allowed))
             else:
-                a=os.system('cls||clear')
+                func_clear_screen.clear_screen()
                 func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                 newpicks_received=""
                 squad,developmentsquad,newpicks_received=sell_player(squad,players_to_sell,developmentsquad)
@@ -2814,32 +2817,32 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             continue
 
         if userinput=="d":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             print("Press enter to continue or: \np for top players by potential\nv value to team(default view) \nf Flawed\ns for (manual) sort\n ") #userinput is accecpted further below as i wanted menu options at the top of the page and info below it
             
             view_draft_valuetoteam()
             userinput1=input("")
             if userinput1=="p":
-                a=os.system('cls||clear')
+                func_clear_screen.clear_screen()
                 func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                 view_draft_potential()
                 input("Press a button to conitnue")
                 continue
             elif userinput1=="v":
-                a=os.system('cls||clear')
+                func_clear_screen.clear_screen()
                 func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                 view_draft_valuetoteam()
                 input("Press a button to conitnue")
                 continue
             elif userinput1=="f":
-                a=os.system('cls||clear')
+                func_clear_screen.clear_screen()
                 func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                 view_draft_flawed_genius()
                 input("Press a button to conitnue")
                 continue
             elif userinput1=="s":
-                a=os.system('cls||clear')
+                func_clear_screen.clear_screen()
                 func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
                 userinput2=input ("Enter an option to sort by : \n\nA -age\nGS -Goalkeeper skill\nDS -Defense Skill\nAS -Attack Skill\nF -Fitness\nAb -Ability\nC -Char\nD -Determination\nL -Luck\nE -experience\nVTT -Value to team\nPA -Potential Ability\ne To exit\n")
                 if userinput2=="e":
@@ -2894,7 +2897,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             #continue
 
         if userinput=="v":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             print ("\nHere Is your first team squad\n")
             func_other_format_input.printplayers(squad,draft="n",outputlimit=100,justpostion="")
@@ -2904,7 +2907,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             continue
 
         if userinput=="r":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             #27032019
             #squad,developmentsquad=renewplayercontract(squad,developmentsquad)
@@ -2912,7 +2915,7 @@ def draft(game, idefscore, iatascore, squad,thisyear_firstround,nextyear_firstro
             continue
 
         if userinput=="x":
-            a=os.system('cls||clear')
+            func_clear_screen.clear_screen()
             func_other_header.header(status="esd", season=season, game=game,defscore=defscore, atascore=atascore)
             func_other_teamreport.report(oursquad=squad, formation=1442, printoutput="y")
             input ("\nPress enter to continue")

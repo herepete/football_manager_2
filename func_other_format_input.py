@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import func_clear_screen
 
 def printplayers(input,vtt="n",draft="n",outputlimit=1000,justpostion="",playerswap="n",extra_field_at_front="n",sellplayer="n"):
     '''
@@ -252,7 +253,7 @@ def printplayers(input,vtt="n",draft="n",outputlimit=1000,justpostion="",players
 
 if __name__=="__main__":
 
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     print ("basic_output")
     input=[['Gk', 'Ada', 'Dunn', 26, 96, 3, 6, 17, 13, 12, 20, 7, 6, 83, 70, 0, 7], ['Gk', 'Austin', 'Amor', 35, 90, 8, 7, 20, 13, 19, 18, 19, 8, 89, 82, 1, 8], ['Gk', 'Elias', 'Mccoy', 34, 80, 9, 4, 18, 17, 17, 10, 7, 5, 73, 71, 1, 5], ['Def', 'Charlie', 'Hart', 32, 1, 80, 18, 18, 12, 18, 11, 18, 8, 80, 69, 2, 7], ['Def', 'Britton', 'Easen', 32, 9, 86, 36, 20, 8, 8, 11, 10, 8, 79, 45, 0, 6], ['Def', 'Ben', 'Bello', 35, 6, 86, 24, 20, 15, 7, 20, 18, 8, 85, 73, 1, 8], ['Def', 'Myles', 'Dixon', 18, 8, 97, 31, 8, 12, 12, 20, 13, 2, 78, 70, 0, 6], ['Def', 'Jonas', 'Bates', 20, 7, 83, 27, 18, 11, 10, 16, 17, 3, 75, 63, 0, 6], ['Def', 'Jamar', 'Love', 22, 1, 82, 49, 12, 6, 18, 19, 10, 5, 73, 63, 1, 5], ['Def', 'Thiago', 'Mayfield', 18, 1, 95, 24, 8, 11, 16, 18, 18, 2, 79, 74, 2, 6], ['Def', 'Davit', 'Dixon', 26, 2, 84, 26, 17, 14, 15, 19, 19, 7, 83, 80, 1, 7], ['Mid', 'Brogan', 'Fabino', 26, 9, 83, 79, 13, 15, 11, 8, 11, 6, 72, 59, 1, 5], ['Mid', 'Marvin', 'Ozel', 35, 1, 71, 98, 15, 14, 11, 15, 14, 8, 80, 68, 2, 7], ['Mid', 'Duncan', 'Stewart', 34, 7, 81, 56, 20, 20, 9, 14, 11, 6, 71, 74, 0, 5], ['Mid', 'Hamada', 'Bello', 18, 3, 57, 87, 9, 7, 5, 7, 15, 2, 58, 36, 1, 2], ['Mid', 'Joe', 'Shelton', 30, 2, 73, 53, 19, 18, 5, 20, 16, 8, 70, 75, 0, 5], ['Mid', 'Davo', 'Corben', 29, 1, 95, 90, 15, 5, 10, 10, 12, 5, 77, 41, 1, 6], ['Mid', 'Myles', 'Duke', 34, 6, 94, 58, 17, 19, 15, 20, 6, 8, 77, 85, 1, 6], ['Mid', 'Harper', 'Webb', 20, 4, 55, 92, 18, 5, 11, 20, 19, 2, 69, 58, 0, 4], ['Ata', 'Bobby', 'Lawson', 22, 8, 7, 96, 11, 9, 9, 14, 14, 6, 81, 54, 2, 7], ['Ata', 'Davo', 'Nicol', 18, 5, 5, 97, 17, 19, 8, 19, 7, 1, 81, 75, 0, 7], ['Ata', 'Elijah', 'Forrest', 23, 10, 3, 90, 9, 18, 20, 17, 11, 3, 78, 88, 0, 6], ['Ata', 'Seb', 'Major', 22, 5, 8, 92, 16, 13, 11, 16, 17, 4, 81, 68, 1, 7], ['Ata', 'Louis', 'Nash', 19, 3, 9, 84, 12, 14, 15, 7, 14, 4, 73, 62, 2, 5]]
     printplayers(input,vtt="n",draft="n",outputlimit=1000,justpostion="",playerswap="n",extra_field_at_front="n")

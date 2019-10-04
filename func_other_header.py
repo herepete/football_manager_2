@@ -5,6 +5,7 @@
 # this is a ugly hack because pip3.7 is not happy at life
 import sys
 import os
+import func_clear_screen
 sys.path.append('/usr/lib/python3.6/site-packages/')
 from termcolor import colored
 
@@ -22,7 +23,7 @@ def header(status, season, game, defscore, atascore):
 """
 
     if status == "i":
-        a=os.system('cls||clear')
+        func_clear_screen.clear_screen()
         print(colored('Intro', 'red'), colored('>>>', 'white'), colored('Season', 'white'), colored('>>>', 'white'), colored("Play Off's", 'white'), colored('>>>', 'white'), colored('End of Season -Training', 'white'),colored('>>>', 'white'),colored('End of Season -Draft', 'white'),colored('>>>','white'),colored('End of game', 'white'))
 
     elif status == "s":
@@ -55,7 +56,7 @@ def header(status, season, game, defscore, atascore):
 if __name__=="__main__":
     # to unit test output
     import os
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     header(status="i", season=1, game=1, defscore=20, atascore=30)
     header(status="s", season=1, game=1, defscore=20, atascore=30)
     header(status="p", season=1, game=1, defscore=20, atascore=30)

@@ -6,6 +6,7 @@ import func_other_game_text
 import os
 from func_other_game_settings import maxbudget
 import func_other_create_players
+import func_clear_screen
 
 def finance_report(oursquad,returnv="n"):
 
@@ -20,11 +21,24 @@ def finance_report(oursquad,returnv="n"):
     if returnv=="n":
         money_left=maxbudget-players_wages
         if money_left <20:
-            print ("*** Note if you breach the salary cap rules you will get deducted a draft pick in the next season***")
+            if money_left < -1:
+                print ("***As it currently stands, you have breached the salary cap and in the next draft you would have the Third round pick removed***")
+            elif money_left < -5:
+                print ("***As it currently stands, you have breached the salary cap and in the next draft you would have the Second round pick removed***")
+            elif money_left < -10:
+                print ("***As it currently stands, you have breached the salary cap and in the next draft you would have the First round pick removed***")
+            elif money_left < -14:
+                print ("***As it currently stands, you have breached the salary cap and in the next draft you would have all your picks removed***")
+            else:
+                print ("*** Note if you breach the salary cap rules you will get deducted a draft pick in the next season***")
+            #input("Press Enter to Continue")
+
+
         print ("Finance report")
         print ("Budget=",maxbudget)
         print ("Players wages=",players_wages)
         print ("Money left over=",money_left)
+        input("\nPress Enter to Continue")
     else:
         return(maxbudget,players_wages,maxbudget-players_wages)
 
@@ -196,7 +210,7 @@ def menu(oursquad, formation, printoutput):
 
     '''
 
-    #a=os.system('cls||clear')
+    #func_clear_screen.clear_screen()
 
     useroption=input("For help on ... Press:\nr for rules\na for player attribute breakdown\nf for finance \nd for draft logic\nt for training info \ne End of Season -Draft\nds for Development + Squad\npc for Players contracts\npp Caculating player Potential\npv Caculating players value to team (vtt)\nsc Special Char notes")
     

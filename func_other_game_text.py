@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import func_clear_screen
 
 
 def intro(printrules="n"):
@@ -54,7 +55,7 @@ Good luck & enjoy :)
 
         if userinput == "a":
             while True:
-                a=os.system('cls||clear')
+                func_clear_screen.clear_screen()
                 print("Team Choice=", teamiwant)
 
                 whattodo = input(
@@ -120,14 +121,14 @@ def initaldrafthelp():
 
 if __name__ == "__main__":
     import os
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     print ("Unit testing\n\n\n\n\n")
     intro()
     input("Press enter to continue")
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     intro(printrules="y")
     input("Press enter to continue")
-    a=os.system('cls||clear')
+    func_clear_screen.clear_screen()
     player_atrributes()
 
     
